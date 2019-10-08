@@ -35,16 +35,19 @@ def read_wire_list(file):
             wire_list.append(line_list[x])
     return logic_gate, flip_flop, input_list, output_list, wire_list
 
-def get_input_output_list(input_list):
-    for w in range(len(input_list)):
-        input_list[w] = input_list[w].split(',')
-        for x in range(len(input_list[w])):
-            input_list[w][x] = input_list[w][x].replace('input ', '')
-            input_list[w][x] = input_list[w][x].replace('CLK', '')
-            input_list[w][x] = input_list[w][x].replace('NRST', '')
-            input_list[w][x] = input_list[w][x].replace(';', '')
-        input_list[w] = list(filter(None, input_list[w]))
-    return input_list
+
+def get_io_list(io_list):
+    for w in range(len(io_list)):
+        io_list[w] = io_list[w].split(',')
+        for x in range(len(io_list[w])):
+            io_list[w][x] = io_list[w][x].replace('input ', '')
+            io_list[w][x] = io_list[w][x].replace('output ', '')
+            io_list[w][x] = io_list[w][x].replace('CLK', '')
+            io_list[w][x] = io_list[w][x].replace('NRST', '')
+            io_list[w][x] = io_list[w][x].replace(';', '')
+        io_list[w] = list(filter(None, io_list[w]))
+    return io_list
+
 
 def remove_nonsense(gate):
     for w in range(len(gate)):
@@ -67,7 +70,9 @@ def remove_nonsense(gate):
         gate[w] = list(filter(None, gate[w]))
     return gate
 
-def get_xinv_number(logic_gate_number):
+
+def get_xinv_number(logic_gate):
+    logic_gate_number = len(logic_gate)
     inv_count = 0
     for w in range(logic_gate_number):
         if '_IV' in logic_gate[w][0]:

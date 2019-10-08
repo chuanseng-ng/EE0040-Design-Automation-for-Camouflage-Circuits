@@ -17,17 +17,17 @@ inv_count = 0
 simulate_number = 0
 total_number = 0
 
-file = 's27_edited.v'
+file = 'camouflage.v'
 logic_gate, flip_flop, input_list, output_list, wire_list = util.read_wire_list(file)
 
-input_list = util.get_input_output_list(input_list)
+input_list = util.get_io_list(input_list)
 input_number = len(input_list[0])
 
 # Reset input values to 0
 for w in range(input_number):
     input_list[1][w] = 0
 
-output_list = util.get_input_output_list(output_list)
+output_list = util.get_io_list(output_list)
 output_number = len(output_list[0])
 
 # Reset output values to 0
@@ -39,7 +39,7 @@ logic_gate = util.remove_nonsense(logic_gate)
 flip_flop = util.remove_nonsense(flip_flop)
 wire_list = util.remove_nonsense(wire_list)
 
-logic_gate_xinv_number = util.get_xinv_number(len(logic_gate))
+logic_gate_xinv_number = util.get_xinv_number(logic_gate)
 wire_number = len(wire_list[0])
 
 # Reset wire values to 0
