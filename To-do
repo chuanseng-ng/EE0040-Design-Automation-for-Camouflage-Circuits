@@ -1,0 +1,11 @@
+Simulate:
+  Redo/refine digital logic circuit simulator to be able to produce correct outputs for specific inputs at least 90% of the time
+  (Regardless of number of logic gates present in netlist)
+
+Camouflage:
+  Remove output corruptibility re-calculator function
+  If multiple gates are needed to be chosen, choose next best in list
+
+Add-on:
+  Create script to automatically convert standard libcell netlist to research libcell netlist
+  
