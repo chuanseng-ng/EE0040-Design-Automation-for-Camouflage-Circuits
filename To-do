@@ -9,3 +9,5 @@ Camouflage:
 Add-on:
   Create script to automatically convert standard libcell netlist to research libcell netlist
   
+Attack:
+  Remove pre-determined pattern and add user-based selection for camouflaged gate pattern
