@@ -10,4 +10,4 @@ Add-on:
   Create script to automatically convert standard libcell netlist to research libcell netlist
   
 Attack:
-  Remove pre-determined pattern and add user-based selection for camouflaged gate pattern
+  Remove pre-determined pattern and add user-based selection for camouflaged gate pattern (Completed [8/12/2019])
