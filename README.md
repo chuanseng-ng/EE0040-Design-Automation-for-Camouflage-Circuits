@@ -29,6 +29,7 @@ Method 2 is faster than method 1
 Part 3:
 Allowing selection of logic gates that could be the correct gate
 1. AND  2. NAND  3. OR  4. NOR  5. XOR  6. XNOR
+
 Process flow will be the same as before, but with the removal of the pre-determined pattern
 
 
