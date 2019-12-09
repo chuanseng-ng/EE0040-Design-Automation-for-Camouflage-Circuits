@@ -16,6 +16,7 @@ Number of logic gates to be camouflaged = user-inputted % of total number of log
 Example: 3 logic gates need to be camouflaged
   Logic gates with top 3 output corruptibility will be chosen
 
+---------------------------------------------------------------------------------------------------------------------------------
 
 Part 2:
 Attacking camouflaged logic circuit to reveal original functionality of camouflaged logic gates
@@ -25,6 +26,7 @@ Attacking camouflaged logic circuit to reveal original functionality of camoufla
  
 Method 2 is faster than method 1
 
+---------------------------------------------------------------------------------------------------------------------------------
 
 Part 3:
 Allowing selection of logic gates that could be the correct gate
