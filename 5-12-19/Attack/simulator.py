@@ -2132,7 +2132,7 @@ for w in range(wire_number):
     wire_list[1][w] = 0
 
 total_number = 2**input_number
-
+print(input_list, '\n', output_list,'\n', wire_list,'\n', logic_gate,'\n', flip_flop,'\n')
 while simulate_number != total_number:
     for w in range(wire_number):
         wire_list[1][w] = 0
@@ -2151,8 +2151,8 @@ while simulate_number != total_number:
 
     simulate_number += 1
 
-'''for w in range(len(result_list)):
-    print('\n', result_list[w])'''
+for w in range(len(result_list)):
+    print('\n', result_list[w])
 
 end = time.time()
 

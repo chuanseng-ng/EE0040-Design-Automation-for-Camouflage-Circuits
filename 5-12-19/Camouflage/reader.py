@@ -98,7 +98,7 @@ class Reader:
             raise Exception('Invalid list type.')
 
         for i, line in enumerate(tmp_list):
-            line = line.split(',')
+            line = line.split()
             for j in range(len(line)):
                 for item in replace_list:
                     line[j] = line[j].replace(item, '')
