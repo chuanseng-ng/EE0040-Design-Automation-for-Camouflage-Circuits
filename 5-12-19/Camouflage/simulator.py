@@ -1,3 +1,8 @@
+import time
+
+start = time.time()
+
+
 # Function definition
 def initial_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
     find_and = '_AND'
@@ -8,8 +13,13 @@ def initial_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
     find_xnor = '_XNOR'
     find_inv = '_IV'
 
+    find_3 = '3_'
+    find_4 = '4_'
+
     input1_value = 0
     input2_value = 0
+    input3_value = 0
+    input4_value = 0
     output1_value = 0
     output1_location = 0
     output1_position = 0
@@ -24,305 +34,910 @@ def initial_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
     flip_flop_number = len(flip_flop)
 
     for a in range(logic_gate_number):
+
         if find_and in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value == 1 and input2_value == 1:
-                output1_value = 1
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1 and input3_value == 1 and input4_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
             else:
-                output1_value = 0
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
-            elif output1_location == 2:
-                output_list[1][output1_position] = output1_value
             else:
-                pass
+                output_list[1][output1_position] = output1_value
 
         elif find_nand in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value == 1 and input2_value == 1:
-                output1_value = 0
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1 and input3_value == 1 and input4_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
             else:
-                output1_value = 1
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
-            elif output1_location == 2:
-                output_list[1][output1_position] = output1_value
             else:
-                pass
+                output_list[1][output1_position] = output1_value
 
         elif find_or in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value == 0 and input2_value == 0:
-                output1_value = 0
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0 and input4_value == 0:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
             else:
-                output1_value = 1
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0:
+                    output1_value = 0
+                else:
+                    output1_value = 1
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
-            elif output1_location == 2:
-                output_list[1][output1_position] = output1_value
             else:
-                pass
+                output_list[1][output1_position] = output1_value
 
         elif find_nor in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value == 0 and input2_value == 0:
-                output1_value = 1
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0:
+                    output1_value = 0
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0 and input4_value == 0:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
             else:
-                output1_value = 0
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0:
+                    output1_value = 1
+                else:
+                    output1_value = 0
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
-            elif output1_location == 2:
-                output_list[1][output1_position] = output1_value
             else:
-                pass
+                output_list[1][output1_position] = output1_value
 
         elif find_xor in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value != input2_value:
-                output1_value = 1
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 1:
+                    output1_value = 1
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0 and input4_value == 0:
+                    output1_value = 0
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1 and input4_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
             else:
-                output1_value = 0
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == input2_value:
+                    output1_value = 0
+                else:
+                    output1_value = 1
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
-            elif output1_location == 2:
-                output_list[1][output1_position] = output1_value
             else:
-                pass
+                output_list[1][output1_position] = output1_value
 
         elif find_xnor in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value != input2_value:
-                output1_value = 0
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 1:
+                    output1_value = 0
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0 and input4_value == 0:
+                    output1_value = 1
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1 and input4_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
             else:
-                output1_value = 1
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == input2_value:
+                    output1_value = 1
+                else:
+                    output1_value = 0
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
-            elif output1_location == 2:
-                output_list[1][output1_position] = output1_value
             else:
-                pass
+                output_list[1][output1_position] = output1_value
 
         elif find_inv in logic_gate[a][0]:
             output1_location = 0
@@ -402,8 +1017,13 @@ def final_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
     find_xnor = '_XNOR'
     find_inv = '_IV'
 
+    find_3 = '3_'
+    find_4 = '4_'
+
     input1_value = 0
     input2_value = 0
+    input3_value = 0
+    input4_value = 0
     output1_value = 0
     output1_location = 0
     output1_position = 0
@@ -425,45 +1045,146 @@ def final_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
         if find_and in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value == 1 and input2_value == 1:
-                output1_value = 1
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1 and input3_value == 1 and input4_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
             else:
-                output1_value = 0
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
@@ -473,45 +1194,146 @@ def final_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
         elif find_nand in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value == 1 and input2_value == 1:
-                output1_value = 0
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1 and input3_value == 1 and input4_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
             else:
-                output1_value = 1
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 1 and input2_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
@@ -521,45 +1343,146 @@ def final_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
         elif find_or in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value == 0 and input2_value == 0:
-                output1_value = 0
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0 and input4_value == 0:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
             else:
-                output1_value = 1
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0:
+                    output1_value = 0
+                else:
+                    output1_value = 1
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
@@ -569,45 +1492,148 @@ def final_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
         elif find_nor in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value == 0 and input2_value == 0:
-                output1_value = 1
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0:
+                    output1_value = 0
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0 and input4_value == 0:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
             else:
-                output1_value = 0
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0:
+                    output1_value = 1
+                else:
+                    output1_value = 0
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
@@ -617,45 +1643,150 @@ def final_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
         elif find_xor in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value != input2_value:
-                output1_value = 1
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 1:
+                    output1_value = 1
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0 and input4_value == 0:
+                    output1_value = 0
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1 and input4_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
             else:
-                output1_value = 0
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == input2_value:
+                    output1_value = 0
+                else:
+                    output1_value = 1
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
@@ -665,45 +1796,150 @@ def final_simulate(input_list, output_list, wire_list, logic_gate, flip_flop):
         elif find_xnor in logic_gate[a][0]:
             output1_location = 0
 
-            for b in range(input_number):
-                if logic_gate[a][3] == input_list[0][b]:
-                    input1_value = input_list[1][b]
-                elif logic_gate[a][4] == input_list[0][b]:
-                    input2_value = input_list[1][b]
-                else:
-                    pass
-
-            for c in range(wire_number):
-                if logic_gate[a][3] == wire_list[0][c]:
-                    input1_value = wire_list[1][c]
-                elif logic_gate[a][4] == wire_list[0][c]:
-                    input2_value = wire_list[1][c]
-                elif logic_gate[a][2] == wire_list[0][c]:
-                    output1_location = 1
-                    output1_position = c
-
-            for d in range(output_number):
-                if logic_gate[a][3] == output_list[0][d]:
-                    input1_value = output_list[1][d]
-                elif logic_gate[a][4] == output_list[0][d]:
-                    input2_value = output_list[1][d]
-                else:
-                    pass
-
-            if output1_location == 0:
-                for f in range(output_number):
-                    if logic_gate[a][2] == output_list[0][f]:
-                        output1_location = 2
-                        output1_position = f
+            if find_3 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
                     else:
                         pass
-            else:
-                pass
 
-            if input1_value != input2_value:
-                output1_value = 0
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 1:
+                    output1_value = 0
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1:
+                    output1_value = 0
+                else:
+                    output1_value = 1
+
+            elif find_4 in logic_gate[a][1]:
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    elif logic_gate[a][5] == input_list[0][b]:
+                        input3_value = input_list[1][b]
+                    elif logic_gate[a][6] == input_list[0][b]:
+                        input4_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][5] == wire_list[0][c]:
+                        input3_value = wire_list[1][c]
+                    elif logic_gate[a][6] == wire_list[0][c]:
+                        input4_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    elif logic_gate[a][5] == output_list[0][d]:
+                        input3_value = output_list[1][d]
+                    elif logic_gate[a][6] == output_list[0][d]:
+                        input4_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == 0 and input2_value == 0 and input3_value == 0 and input4_value == 0:
+                    output1_value = 1
+                elif input1_value == 1 and input2_value == 1 and input3_value == 1 and input4_value == 1:
+                    output1_value = 1
+                else:
+                    output1_value = 0
+
             else:
-                output1_value = 1
+                for b in range(input_number):
+                    if logic_gate[a][3] == input_list[0][b]:
+                        input1_value = input_list[1][b]
+                    elif logic_gate[a][4] == input_list[0][b]:
+                        input2_value = input_list[1][b]
+                    else:
+                        pass
+
+                for c in range(wire_number):
+                    if logic_gate[a][3] == wire_list[0][c]:
+                        input1_value = wire_list[1][c]
+                    elif logic_gate[a][4] == wire_list[0][c]:
+                        input2_value = wire_list[1][c]
+                    elif logic_gate[a][2] == wire_list[0][c]:
+                        output1_location = 1
+                        output1_position = c
+
+                for d in range(output_number):
+                    if logic_gate[a][3] == output_list[0][d]:
+                        input1_value = output_list[1][d]
+                    elif logic_gate[a][4] == output_list[0][d]:
+                        input2_value = output_list[1][d]
+                    else:
+                        pass
+
+                if output1_location == 0:
+                    for f in range(output_number):
+                        if logic_gate[a][2] == output_list[0][f]:
+                            output1_location = 2
+                            output1_position = f
+                        else:
+                            pass
+                else:
+                    pass
+
+                if input1_value == input2_value:
+                    output1_value = 1
+                else:
+                    output1_value = 0
 
             if output1_location == 1:
                 wire_list[1][output1_position] = output1_value
@@ -787,6 +2023,7 @@ result_list = []
 
 
 #   Variables
+#file = input('State the netlist file name, with the file type: ')
 file = 'camouflage.v'
 find_gate = '.A'
 find_flip = '.D'
@@ -861,6 +2098,8 @@ for w in range(len(logic_gate)):
         logic_gate[w][x] = logic_gate[w][x].replace(',', '')
         logic_gate[w][x] = logic_gate[w][x].replace('.A', '')
         logic_gate[w][x] = logic_gate[w][x].replace('.B', '')
+        logic_gate[w][x] = logic_gate[w][x].replace('.C', '')
+        logic_gate[w][x] = logic_gate[w][x].replace('.D', '')
         logic_gate[w][x] = logic_gate[w][x].replace('.Z', '')
     logic_gate[w] = list(filter(None, logic_gate[w]))
 logic_gate_number = len(logic_gate)
@@ -879,7 +2118,6 @@ for w in range(len(flip_flop)):
         flip_flop[w][x] = flip_flop[w][x].replace('.RN', '')
     flip_flop[w] = list(filter(None, flip_flop[w]))
 flip_flop_number = len(flip_flop)
-
 
 for w in range(len(wire_list)):
     wire_list[w] = wire_list[w].split(',')
@@ -913,5 +2151,9 @@ while simulate_number != total_number:
 
     simulate_number += 1
 
-'''for w in range(len(result_list)):
-    print('\n', result_list[w])'''
+for w in range(len(result_list)):
+    print('\n', result_list[w])
+
+end = time.time()
+
+runtime = end - start
