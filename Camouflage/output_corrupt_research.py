@@ -1,5 +1,5 @@
 from copy import*
-import simulator
+import Simulator
 
 
 def gate_change(logic_gate):
@@ -48,39 +48,39 @@ def output_corrupt(original_result, modified_result):
 # Variables declaration
 #   Lists
 corrupt_list = []
-original_logic = deepcopy(simulator.logic_gate)
+original_logic = deepcopy(Simulator.logic_gate)
 modified_logic = deepcopy(original_logic)
-original_result = deepcopy(simulator.result_list)
+original_result = deepcopy(Simulator.result_list)
 modified_result = []
 
-for w in range(simulator.logic_gate_number):
+for w in range(Simulator.logic_gate_number):
     del modified_result[:]
     simulate_number = 0
 
     # Reset input values to 0
-    for a in range(simulator.input_number):
-        simulator.input_list[1][a] = 0
+    for a in range(Simulator.input_number):
+        Simulator.input_list[1][a] = 0
 
     modified_logic[w][0] = gate_change(modified_logic[w][0])
 
-    while simulate_number != simulator.total_number:
-        for x in range(simulator.wire_number):
-            simulator.wire_list[1][x] = 0
+    while simulate_number != Simulator.total_number:
+        for x in range(Simulator.wire_number):
+            Simulator.wire_list[1][x] = 0
 
-        updated_wire1, updated_output1 = simulator.initial_simulate(
-            simulator.input_list, simulator.output_list, simulator.wire_list, modified_logic, simulator.flip_flop)
-        updated_wire, updated_output = simulator.initial_simulate(
-            simulator.input_list, updated_output1, updated_wire1, modified_logic, simulator.flip_flop)
-        modified_result.append(simulator.final_simulate(
-            simulator.input_list, updated_output, updated_wire, modified_logic, simulator.flip_flop))
+        updated_wire1, updated_output1 = Simulator.initial_simulate(
+            Simulator.input_list, Simulator.output_list, Simulator.wire_list, modified_logic, Simulator.flip_flop)
+        updated_wire, updated_output = Simulator.initial_simulate(
+            Simulator.input_list, updated_output1, updated_wire1, modified_logic, Simulator.flip_flop)
+        modified_result.append(Simulator.final_simulate(
+            Simulator.input_list, updated_output, updated_wire, modified_logic, Simulator.flip_flop))
 
-        simulator.input_list[1][simulator.input_number-1] += 1
+        Simulator.input_list[1][Simulator.input_number-1] += 1
 
-        temp_count = simulator.input_number - 1
+        temp_count = Simulator.input_number - 1
         while temp_count > -1:
-            if simulator.input_list[1][temp_count] == 2:
-                simulator.input_list[1][temp_count] = 0
-                simulator.input_list[1][temp_count - 1] += 1
+            if Simulator.input_list[1][temp_count] == 2:
+                Simulator.input_list[1][temp_count] = 0
+                Simulator.input_list[1][temp_count - 1] += 1
             temp_count -= 1
 
         simulate_number += 1

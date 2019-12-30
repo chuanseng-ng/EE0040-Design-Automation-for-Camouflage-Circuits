@@ -1,5 +1,3 @@
-import os
-
 class Reader:
     def __init__(self):
         self.logic_gate = []
