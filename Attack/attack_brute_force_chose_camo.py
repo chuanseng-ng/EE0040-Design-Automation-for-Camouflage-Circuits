@@ -1,6 +1,5 @@
 import time
 import simulator
-import choose_camo
 
 start = time.time()
 

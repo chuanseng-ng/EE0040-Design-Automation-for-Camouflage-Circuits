@@ -19,7 +19,7 @@ class Reader:
         self.output_number = 0
         self.wire_number = 0
 
-    def whatever(self, file_name):
+    def extract(self, file_name):
         # Variables declaration
         #   Lists
         # Read file and store them into list of strings
@@ -33,7 +33,6 @@ class Reader:
         return self.input_list, self.output_list, self.wire_list, self.logic_gate, self.flip_flop
 
     def _extract_lists(self, file_name):
-        print(os.getcwd())
         with open(file_name) as f:
             line_list = [line.rstrip('\n') for line in f]
         # Finding keywords from list of string
@@ -81,7 +80,6 @@ class Reader:
         # Reset input values to 0
         for i in range(tmp_number):
             tmp_list[1][i] = 0
-        print(tmp_list)
 
     def _process_logic_lists(self, list_type):
         replace_logic_gate = ['(', ')', ',','.A','.B','.C','.D','.Z',';']
@@ -104,4 +102,3 @@ class Reader:
                     line[j] = line[j].replace(item, '')
             tmp_list[i] = list(filter(None, line))
 
-        print(tmp_list)
