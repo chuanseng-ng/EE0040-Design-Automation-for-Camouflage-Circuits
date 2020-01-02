@@ -16,7 +16,7 @@ def next_camouflage(input_list, output_list, wire_list, logic_gate, flip_flop, m
         for a in range(input_number):
             input_list[1][a] = 0
 
-        modified_logic_gate[w][0] = Camouflage.gate_change(modified_logic_gate[w][0])
+        modified_logic_gate[w][0] = Camouflage._gate_change(modified_logic_gate[w][0])
 
         while simulate_number != total_number:
             for x in range(len(wire_list[0])):
@@ -35,9 +35,9 @@ def next_camouflage(input_list, output_list, wire_list, logic_gate, flip_flop, m
 
             simulate_number += 1
 
-        modified_logic_gate[w][0] = Camouflage.gate_change(modified_logic_gate[w][0])
+        modified_logic_gate[w][0] = Camouflage._gate_change(modified_logic_gate[w][0])
 
-        corrupt_list.append(Camouflage.output_corrupt(original_result, modified_result))
+        corrupt_list.append(Camouflage._output_corrupt(original_result, modified_result))
         print('\n', corrupt_list)
 
     camouflage_corrupt = corrupt_list[0]
@@ -52,7 +52,7 @@ def next_camouflage(input_list, output_list, wire_list, logic_gate, flip_flop, m
 
     camouflage_count_list.append(corrupt_list_count)
     modified_logic_gate[corrupt_list_count][0] = \
-        Camouflage.gate_change(modified_logic_gate[corrupt_list_count][0])
+        Camouflage._gate_change(modified_logic_gate[corrupt_list_count][0])
 
     return modified_logic_gate, camouflage_count_list
 
@@ -120,7 +120,7 @@ for w in range(len(initial_corrupt)):
 
 camouflage_count_list.append(first_camouflage_count)
 modified_logic_gate[first_camouflage_count][0] = \
-    Camouflage.gate_change(modified_logic_gate[first_camouflage_count][0])
+    Camouflage._gate_change(modified_logic_gate[first_camouflage_count][0])
 
 while user_input != str(len(camouflage_count_list)):
     modified_logic_gate, camouflage_count_list = next_camouflage(input_list, output_list, wire_list, logic_gate, flip_flop, modified_logic_gate, camouflage_count_list)

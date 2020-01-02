@@ -68,6 +68,7 @@ class Reader:
         else:
             raise Exception('Invalid list type.')
 
+        tmp_number = 0
         for i, line in enumerate(tmp_list):
             line = line.split(',')
             for j in range(len(line)):

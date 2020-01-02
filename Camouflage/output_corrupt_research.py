@@ -1,6 +1,39 @@
-from copy import*
-import Simulator
+from copy import deepcopy
 
+def corrupt(simulator):
+    # Variables declaration
+    #   Lists
+    corrupt_list = []
+    simulation_result = simulator.simulate()
+    original_result = deepcopy(simulation_result)
+    original_logic = deepcopy(simulator.logic_gate)
+    modified_logic = deepcopy(original_logic)
+
+    for i in range(len(original_logic)):
+        # Reset input values to 0
+        for j in range(len(simulator.input_list[0])):
+            simulator.input_list[1][j] = 0
+
+        modified_logic[i][0] = gate_change(modified_logic[i][0])
+
+        # Change logic
+        # a = deepcopy(simulator.logic_gate)
+        simulator.logic_gate = modified_logic
+        # assert a == simulator.logic_gate
+
+        simulation_result = simulator.simulate()
+        modified_result = simulation_result
+
+        # Revert logic
+        modified_logic[i][0] = gate_change(modified_logic[i][0])
+        simulator.logic_gate = modified_logic
+
+        corrupt_list.append(_output_corrupt(original_result, modified_result))
+
+        # print('\n')
+        '''for w in range(len(modified_result)):
+            print('\n', modified_result[w])'''
+    return corrupt_list
 
 def gate_change(logic_gate):
     # NAND <-> OR
@@ -26,71 +59,20 @@ def gate_change(logic_gate):
         logic_gate = 'HS65_LHS_XNOR2X3'
     elif find_xnor in logic_gate:
         logic_gate = 'HS65_LHS_XOR2X3'
-    else:
-        pass
+    # else:
+    #     print('No change')
 
     return logic_gate
 
 
-def output_corrupt(original_result, modified_result):
+def _output_corrupt(original_result, modified_result):
     corrupt_count = 0
 
-    for w in range(len(original_result)):
-        for x in range(len(original_result[w])):
-            if original_result[w][x] != modified_result[w][x]:
+    for i in range(len(original_result)):
+        for j in range(len(original_result[i])):
+            if original_result[i][j] != modified_result[i][j]:
                 corrupt_count += 1
             else:
                 pass
 
     return corrupt_count
-
-
-# Variables declaration
-#   Lists
-corrupt_list = []
-original_logic = deepcopy(Simulator.logic_gate)
-modified_logic = deepcopy(original_logic)
-original_result = deepcopy(Simulator.result_list)
-modified_result = []
-
-for w in range(Simulator.logic_gate_number):
-    del modified_result[:]
-    simulate_number = 0
-
-    # Reset input values to 0
-    for a in range(Simulator.input_number):
-        Simulator.input_list[1][a] = 0
-
-    modified_logic[w][0] = gate_change(modified_logic[w][0])
-
-    while simulate_number != Simulator.total_number:
-        for x in range(Simulator.wire_number):
-            Simulator.wire_list[1][x] = 0
-
-        updated_wire1, updated_output1 = Simulator.initial_simulate(
-            Simulator.input_list, Simulator.output_list, Simulator.wire_list, modified_logic, Simulator.flip_flop)
-        updated_wire, updated_output = Simulator.initial_simulate(
-            Simulator.input_list, updated_output1, updated_wire1, modified_logic, Simulator.flip_flop)
-        modified_result.append(Simulator.final_simulate(
-            Simulator.input_list, updated_output, updated_wire, modified_logic, Simulator.flip_flop))
-
-        Simulator.input_list[1][Simulator.input_number-1] += 1
-
-        temp_count = Simulator.input_number - 1
-        while temp_count > -1:
-            if Simulator.input_list[1][temp_count] == 2:
-                Simulator.input_list[1][temp_count] = 0
-                Simulator.input_list[1][temp_count - 1] += 1
-            temp_count -= 1
-
-        simulate_number += 1
-
-    modified_logic[w][0] = gate_change(modified_logic[w][0])
-
-    corrupt_list.append(output_corrupt(original_result, modified_result))
-
-    print('\n')
-    '''for w in range(len(modified_result)):
-        print('\n', modified_result[w])'''
-
-print('\n', corrupt_list)
