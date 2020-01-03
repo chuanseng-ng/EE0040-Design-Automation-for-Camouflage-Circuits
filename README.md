@@ -25,7 +25,7 @@ Number of logic gates to be camouflaged = user-inputted % of total number of log
 Attacking camouflaged logic circuit to reveal original functionality of camouflaged logic gates
 2 possible methods -
   1. Process one camouflage gate combination at a time after comparing all outputs with expected outputs
-  2. Process all camouflage gate combination for each input combination after comparing the outputs with expected outputs
+  2. Process all camouflage gate combination for each input combination after comparing the outputs with expected outputs and eliminate those that are different
  
 Method 2 is faster than method 1
 
