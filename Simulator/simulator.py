@@ -8,27 +8,29 @@ class Simulator:
         self.wire_list = deepcopy(wire_list)
         self.logic_gate = deepcopy(logic_gate)
         self.flip_flop = deepcopy(flip_flop)
+        self.find_list = ['_AND','_NAND','_OR','_NOR','_XOR','_XNOR','_IV']
 
     def simulate(self):
         total_number = 2 ** len(self.input_list[0])
 
         result_list = []
+        tmp_input_list = deepcopy(self.input_list)
 
         for _ in range(total_number):
             if len(self.wire_list) != 0: 
                 for i in range(len(self.wire_list[0])):
                     self.wire_list[1][i] = 0
 
-            simulation_result = self._simulate_stable(self.input_list, self.output_list, self.wire_list, self.logic_gate, self.flip_flop)
+            simulation_result = self._simulate_stable(tmp_input_list, self.output_list, self.wire_list, self.logic_gate, self.flip_flop)
             result_list.append(simulation_result)
 
-            self.input_list[1][len(self.input_list[0]) - 1] += 1
+            tmp_input_list[1][len(tmp_input_list[0]) - 1] += 1
 
-            temp_count = len(self.input_list[0]) - 1
+            temp_count = len(tmp_input_list[0]) - 1
             while temp_count > -1:
-                if self.input_list[1][temp_count] == 2:
-                    self.input_list[1][temp_count] = 0
-                    self.input_list[1][temp_count - 1] += 1
+                if tmp_input_list[1][temp_count] == 2:
+                    tmp_input_list[1][temp_count] = 0
+                    tmp_input_list[1][temp_count - 1] += 1
                 temp_count -= 1
         return result_list
 
@@ -36,7 +38,6 @@ class Simulator:
     def _simulate_cycle(self,input_list, output_list, wire_list, logic_gate, flip_flop):
         ''' Simulates one cycle
         '''
-        find_list = ['_AND','_NAND','_OR','_NOR','_XOR','_XNOR','_IV']
         # name of input: number of inputs
         input_param_names = {'2X':2, '3X':3, '4X':4, 'IVX2':1}
 
@@ -59,7 +60,7 @@ class Simulator:
                     
                     input_values = self._output_match(input_values, output_list, gate, param_num)
                     output1_location, output1_position = self._logic_output_match(gate, output1_location, output1_position, output_list)
-                    for find in find_list:
+                    for find in self.find_list:
                         if find in gate[0]:
                             output1_value = self._logic_output_calc(find, input_values)
             assert output1_value != -1
@@ -88,7 +89,7 @@ class Simulator:
         result_output_list = []
         tmp_result_output = deepcopy(output_list)
         tmp_result_wire = deepcopy(wire_list)
-        for i in range(upper_limit):
+        for _ in range(upper_limit):
             tmp_result_output, tmp_result_wire = self._simulate_cycle(input_list, tmp_result_output, tmp_result_wire, logic_gate, flip_flop)
             result_output_list.append(tmp_result_output)
             if len(result_output_list) > 1:

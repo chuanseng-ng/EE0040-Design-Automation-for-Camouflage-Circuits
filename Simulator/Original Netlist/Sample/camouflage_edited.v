@@ -11,11 +11,11 @@ wire n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13;
 
 HS65_LH_OR2X4 U1 (.Z(n1), .A(n6), .B(a) );
 
-HS65_LH_AND/NOR2X2 U2 (.Z(n2), .A(c), .B(d) );
+HS65_LH_CAMO2X2 U2 (.Z(n2), .A(c), .B(d) );
 
 HS65_LH_NAND2X2 U3 (.Z(n3), .A(n1), .B(b) );
-HS65_LH_OR/NAND2X2 U4 (.Z(n5), .A(n2), .B(b) );
-HS65_LH_OR/NAND2X2 U5 (.Z(n4), .A(n3), .B(n2) );
+HS65_LH_NAND2X2 U4 (.Z(n5), .A(n2), .B(b) );
+HS65_LH_CAMO2X2 U5 (.Z(n4), .A(n3), .B(n2) );
 
 HS65_LH_DFPRQX4 U6 (.D(n4), .CP(n10), .RN(n13), .Q(Q3) );
 HS65_LH_DFPRQX4 U7 (.D(n5), .CP(n12), .RN(n13), .Q(n7) );
