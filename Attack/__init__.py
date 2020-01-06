@@ -1,1 +1,1 @@
-from .attack_brute_force_chose_camo import *
+from .attack_bforce import *
