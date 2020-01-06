@@ -8,7 +8,6 @@ folder_path = os.path.join(os.getcwd(), 'Tests\\sample_files')
 file_path = os.path.join(folder_path, file_name)
 reader = Simulator.Reader()
 input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
-simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
 
 # corrupt_list = Camouflage.corrupt(simulator)
 # print('\n', corrupt_list)
@@ -16,6 +15,7 @@ simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, l
 choice = 0
 choice =1
 while(choice != 3):
+    simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
     try:
         # choice = int(input('\nSelect an option.\n 1. Camouflage\n 2. Attack\n 3. Exit\n Your choice: '))
         if choice == 1:

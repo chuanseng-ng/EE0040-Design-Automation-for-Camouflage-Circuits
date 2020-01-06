@@ -3,7 +3,11 @@ from copy import deepcopy
 class Simulator:
     def __init__(self, file_path, input_list, output_list, wire_list, logic_gate, flip_flop):
         self.file_path = file_path
-        self.input_list, self.output_list, self.wire_list, self.logic_gate, self.flip_flop = input_list, output_list, wire_list, logic_gate, flip_flop
+        self.input_list = deepcopy(input_list)
+        self.output_list = deepcopy(output_list)
+        self.wire_list = deepcopy(wire_list)
+        self.logic_gate = deepcopy(logic_gate)
+        self.flip_flop = deepcopy(flip_flop)
 
     def simulate(self):
         total_number = 2 ** len(self.input_list[0])
