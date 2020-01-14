@@ -1,20 +1,22 @@
 import os
+import pandas as pd
 import Simulator
 import Camouflage
 import Attack
+
 folder_path = os.path.join(os.getcwd(), 'Simulator\\Original Netlist\\Sample')
-file_name = 'camouflage.v'
-file_path = os.path.join(folder_path, file_name)
 
 # corrupt_list = Camouflage.corrupt(simulator)
 # print('\n', corrupt_list)
 
 #choice = 0
-choice = 1
+choice = 2
 while(choice != 3):
     try:
         # choice = int(input('\nSelect an option.\n 1. Camouflage\n 2. Attack\n 3. Exit\n Your choice: '))
         if choice == 1:
+            file_name = 'camouflage.v'
+            file_path = os.path.join(folder_path, file_name)
             reader = Simulator.Reader()
             input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
             simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
@@ -36,22 +38,38 @@ while(choice != 3):
 
             Camouflage.camouflage(simulator, camo_num)
         elif choice == 2:
-            reader = Simulator.Reader()
-            input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
-            simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
-            correct_result_list = simulator.simulate()
-            print(correct_result_list, '???')
-
-            file_name = 'camouflage_edited.v'
+            file_name = 's27_clean.v'
             file_path = os.path.join(folder_path, file_name)
             reader = Simulator.Reader()
             input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
             simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
-            Attack.attack(simulator, correct_result_list)
+            correct_result_list = simulator.simulate()
+            # print(correct_result_list, '???')
+
+            file_name = 's27_edited.v'
+            file_path = os.path.join(folder_path, file_name)
+            reader = Simulator.Reader()
+            input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
+            simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
+            attack_output, camo_gate_names = Attack.attack(simulator, correct_result_list)
+
+            attack_output_keys = list(attack_output.keys())
+            print(camo_gate_names)
+            columns = camo_gate_names + ['Result']
+            # print(columns)
+            table_columns = []
+            for i in range(len(attack_output_keys)):
+                tmp_column = []
+                for j in range(len(attack_output_keys[0])):
+                    tmp_column.append(attack_output_keys[i][j])
+                tmp_column.append(attack_output[attack_output_keys[i]][0])
+                table_columns.append(tmp_column)
+            df = pd.DataFrame(table_columns, columns=columns)
+            print(df)
+            choice = 3
+        elif choice == 3:
+            break
 
     except ValueError:
         print('Invalid menu choice')
         choice = 0
-
-
-# %%

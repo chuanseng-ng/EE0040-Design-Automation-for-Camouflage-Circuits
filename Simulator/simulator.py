@@ -34,8 +34,28 @@ class Simulator:
                 temp_count -= 1
         return result_list
 
+    def _simulate_stable(self,input_list, output_list, wire_list, logic_gate, flip_flop, upper_limit=10):
+        ''' Simulate until stable by comparing results in each cycle of simulation
+        '''
+        result_output_list = []
+        tmp_result_output = deepcopy(output_list)
+        tmp_result_wire = deepcopy(wire_list)
+        for i in range(upper_limit):
+            if i < 2:
+                tmp_result_output, tmp_result_wire = self._simulate_cycle(input_list, tmp_result_output, tmp_result_wire, logic_gate, flip_flop, True)
+            else:
+                tmp_result_output, tmp_result_wire = self._simulate_cycle(input_list, tmp_result_output, tmp_result_wire, logic_gate, flip_flop)
+            # print(tmp_result_wire, '#######')
+            result_output_list.append(tmp_result_output)
+            if len(result_output_list) > 1:
+                if result_output_list[-1] == result_output_list[-2]:
+                    # print(tmp_result_wire, ' stable')
+                    return result_output_list[-1][1]
+        print('Metastability unresolved. Output not stable after {} cycles of simulation.'.format(upper_limit))
+        return result_output_list[-1][1]
+
     # Function definition
-    def _simulate_cycle(self,input_list, output_list, wire_list, logic_gate, flip_flop):
+    def _simulate_cycle(self,input_list, output_list, wire_list, logic_gate, flip_flop, first_cycle=False):
         ''' Simulates one cycle
         '''
         # name of input: number of inputs
@@ -52,6 +72,7 @@ class Simulator:
             output1_location = 0
             output1_position = 0
             for key in input_param_names:
+                # print('gate:',gate[0])
                 if key in gate[0]:
                     param_num = input_param_names[key]
                     # print('key',key, param_num)
@@ -61,8 +82,12 @@ class Simulator:
                     input_values = self._output_match(input_values, output_list, gate, param_num)
                     output1_location, output1_position = self._logic_output_match(gate, output1_location, output1_position, output_list)
                     for find in self.find_list:
+                        # print(find, gate[0])
                         if find in gate[0]:
                             output1_value = self._logic_output_calc(find, input_values)
+            
+            if output1_value == -1:
+                print(logic_gate)
             assert output1_value != -1
             wire_list, output_list = self._update_node(wire_list, output_list, output1_location, output1_position, output1_value)
 
@@ -73,30 +98,16 @@ class Simulator:
                         wire_number = len(wire_list[0])
                     else:
                         wire_number = 0
-                    for h in range(wire_number):
-                        if flip_flop[g][2] == wire_list[0][h]:
-                            for i in range(wire_number):
-                                if flip_flop[g][5] == wire_list[0][i]:
-                                    wire_list[1][i] = wire_list[1][h]
-                            for j in range(output_number):
-                                if flip_flop[g][5] == output_list[0][j]:
-                                    output_list[1][j] = wire_list[1][h]
+                    if not first_cycle:
+                        for h in range(wire_number):
+                            if flip_flop[g][2] == wire_list[0][h]:
+                                for i in range(wire_number):
+                                    if flip_flop[g][5] == wire_list[0][i]:
+                                        wire_list[1][i] = wire_list[1][h]
+                                for j in range(output_number):
+                                    if flip_flop[g][5] == output_list[0][j]:
+                                        output_list[1][j] = wire_list[1][h]
         return output_list, wire_list
-
-    def _simulate_stable(self,input_list, output_list, wire_list, logic_gate, flip_flop, upper_limit=10):
-        ''' Simulate until stable by comparing results in each cycle of simulation
-        '''
-        result_output_list = []
-        tmp_result_output = deepcopy(output_list)
-        tmp_result_wire = deepcopy(wire_list)
-        for _ in range(upper_limit):
-            tmp_result_output, tmp_result_wire = self._simulate_cycle(input_list, tmp_result_output, tmp_result_wire, logic_gate, flip_flop)
-            result_output_list.append(tmp_result_output)
-            if len(result_output_list) > 1:
-                if result_output_list[-1] == result_output_list[-2]:
-                    return result_output_list[-1][1]
-        print('Metastability unresolved. Output not stable after {} cycles of simulation.'.format(upper_limit))
-        return result_output_list[-1][1]
 
     def _input_match(self,input_list, gate, param_num):
         values_list = [0]*param_num

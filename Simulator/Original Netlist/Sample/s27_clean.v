@@ -1,4 +1,4 @@
-module s27(GND,VDD,CK,G0,G1,G17,G2,G3);
+module s27(GND,VDD,CLK,G0,G1,G17,G2,G3);
 input CLK,G0,G1,G2,G3;
 output G17;
 
