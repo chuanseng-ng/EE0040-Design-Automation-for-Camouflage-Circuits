@@ -34,7 +34,7 @@ class Simulator:
                 temp_count -= 1
         return result_list
 
-    def _simulate_stable(self,input_list, output_list, wire_list, logic_gate, flip_flop, upper_limit=10):
+    def _simulate_stable(self,input_list, output_list, wire_list, logic_gate, flip_flop, upper_limit=20):
         ''' Simulate until stable by comparing results in each cycle of simulation
         '''
         result_output_list = []
@@ -47,11 +47,11 @@ class Simulator:
                 tmp_result_output, tmp_result_wire = self._simulate_cycle(input_list, tmp_result_output, tmp_result_wire, logic_gate, flip_flop)
             # print(tmp_result_wire, '#######')
             result_output_list.append(tmp_result_output)
-            if len(result_output_list) > 1:
-                if result_output_list[-1] == result_output_list[-2]:
+            if len(result_output_list) > 3:
+                if result_output_list[-1] == result_output_list[-2] and result_output_list[-2] == result_output_list[-3] and result_output_list[-3] == result_output_list[-4]:
                     # print(tmp_result_wire, ' stable')
                     return result_output_list[-1][1]
-        print('Metastability unresolved. Output not stable after {} cycles of simulation.'.format(upper_limit))
+        print('Last output combination used, as outputs not stable after {} cycles of simulation for input combination'.format(upper_limit), input_list[1])
         return result_output_list[-1][1]
 
     # Function definition

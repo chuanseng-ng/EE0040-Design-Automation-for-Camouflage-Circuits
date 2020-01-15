@@ -13,32 +13,32 @@ def attack(simulator, correct_result_list: list):
     print("6 - XNOR \n")
     print("7 - End \n")
 
-    # user_input = input("Selection: ")
-    # chosen_camo = []
-    # while user_input != "7":
-    #     camo_combi = camo_combi + 1
-    #     if user_input == "1":
-    #         chosen_camo.append('HS65_LH_AND2X4')
-    #         user_input = input("Selection: ")
-    #     elif user_input == "2":
-    #         chosen_camo.append('HS65_LH_NAND2X2')
-    #         user_input = input("Selection: ")
-    #     elif user_input == "3":
-    #         chosen_camo.append('HS65_LH_OR2X4')
-    #         user_input = input("Selection: ")
-    #     elif user_input == "4":
-    #         chosen_camo.append('HS65_LH_NOR2X2')
-    #         user_input = input("Selection: ")
-    #     elif user_input == "5":
-    #         chosen_camo.append('HS65_LH_XOR2X3')
-    #         user_input = input("Selection: ")
-    #     elif user_input == "6":
-    #         chosen_camo.append('HS65_LH_XNOR2X3')
-    #         user_input = input("Selection: ")
-    #     else:
-    #         break
+    user_input = input("Selection: ")
+    chosen_camo = []
+    while user_input != "7":
+        camo_combi = camo_combi + 1
+        if user_input == "1":
+            chosen_camo.append('HS65_LH_AND2X4')
+            user_input = input("Selection: ")
+        elif user_input == "2":
+            chosen_camo.append('HS65_LH_NAND2X2')
+            user_input = input("Selection: ")
+        elif user_input == "3":
+            chosen_camo.append('HS65_LH_OR2X4')
+            user_input = input("Selection: ")
+        elif user_input == "4":
+            chosen_camo.append('HS65_LH_NOR2X2')
+            user_input = input("Selection: ")
+        elif user_input == "5":
+            chosen_camo.append('HS65_LH_XOR2X3')
+            user_input = input("Selection: ")
+        elif user_input == "6":
+            chosen_camo.append('HS65_LH_XNOR2X3')
+            user_input = input("Selection: ")
+        else:
+            break
 
-    chosen_camo = ['HS65_LH_AND2X4', 'HS65_LH_NAND2X2', 'HS65_LH_NOR2X2']
+    # chosen_camo = ['HS65_LH_AND2X4', 'HS65_LH_NAND2X2', 'HS65_LH_NOR2X2']
 
     logic_gate_list = deepcopy(simulator.logic_gate)
     camo_gates_indexes = _get_camo_gate_indexes(logic_gate_list)
@@ -46,33 +46,6 @@ def attack(simulator, correct_result_list: list):
     output_compare_result = _match_gate_output(correct_result_list, chosen_camo, camo_gates_indexes, simulator)
 
     return output_compare_result, camo_gates_names
-
-#     Keep print lines
-#     print('\nLegend:')
-#     for i in range(int(str(camo_combi))**camo_gate_number):
-#         print('\n', camo_gate_output[0][input_number + i], ':')
-#         for b in range(camo_gate_number):
-#             print(logic_gate_list[camo_gates[b]][1], '->', camo_gate_combi[b][i])
-
-#     print('\n')
-#     print('\nCorrect combination of logic gates:',)
-#     for i in range(camo_gate_number):
-#         print('\n', logic_gate2[camo_gates[0][i]][1], camo_gates[1][i], '->',
-#             camo_gate_combi[i][camo_gate_output[-1].index('Y') - input_number])
-
-#     print('\nNumber of tries to break:', simulate_number)
-#     print('\nRuntime is', runtime, 'sec')
-
-# def create_table(input_number, logic_gate_number, logic_gate2):
-#     table = []
-#     _create_table_with_header(table, input_number)
-#     camo_gates, camo_gate_number = _get_camo_gate_indexes(logic_gate_number, logic_gate2)
-
-# def _create_table_with_header(table, input_number):
-#     header_list = []
-#     for i in range(input_number):
-#         header_list.append('I' + str(i))
-#     return table.insert(0, header_list)
 
 def _get_camo_gate_indexes(logic_gate_list: list):
     camouflage_gate = 'CAMO'

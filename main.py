@@ -9,15 +9,16 @@ folder_path = os.path.join(os.getcwd(), 'Simulator\\Original Netlist\\Sample')
 # corrupt_list = Camouflage.corrupt(simulator)
 # print('\n', corrupt_list)
 
-#choice = 0
+# choice = input('\n Choose 1 to camouflage and 2 to attack logic circuit.\n :')
 choice = 2
 while(choice != 3):
     try:
         # choice = int(input('\nSelect an option.\n 1. Camouflage\n 2. Attack\n 3. Exit\n Your choice: '))
         if choice == 1:
-            file_name = 'camouflage.v'
+            file_name = 's298_clean.v'
             file_path = os.path.join(folder_path, file_name)
             reader = Simulator.Reader()
+
             input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
             simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
             user_input = input('\n State percentage of gates to be camouflaged.\n Default choice is 10% of total logic gates. (%): ')
@@ -38,15 +39,15 @@ while(choice != 3):
 
             Camouflage.camouflage(simulator, camo_num)
         elif choice == 2:
-            file_name = 's27_clean.v'
+            file_name = 'camouflage.v'
             file_path = os.path.join(folder_path, file_name)
             reader = Simulator.Reader()
             input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
             simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
             correct_result_list = simulator.simulate()
-            # print(correct_result_list, '???')
+            print(correct_result_list, '???')
 
-            file_name = 's27_edited.v'
+            file_name = 'camouflage_edited.v'
             file_path = os.path.join(folder_path, file_name)
             reader = Simulator.Reader()
             input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
@@ -54,7 +55,7 @@ while(choice != 3):
             attack_output, camo_gate_names = Attack.attack(simulator, correct_result_list)
 
             attack_output_keys = list(attack_output.keys())
-            print(camo_gate_names)
+            # print(camo_gate_names)
             columns = camo_gate_names + ['Result']
             # print(columns)
             table_columns = []

@@ -5,6 +5,7 @@ def corrupt(simulator):
     #   Lists
     corrupt_list = []
     simulation_result = simulator.simulate()
+    # print(simulation_result)
     original_result = deepcopy(simulation_result)
     original_logic = deepcopy(simulator.logic_gate)
     modified_logic = deepcopy(original_logic)
@@ -23,6 +24,7 @@ def corrupt(simulator):
 
         simulation_result = simulator.simulate()
         modified_result = simulation_result
+        # print(modified_result)
 
         # Revert logic
         modified_logic[i][0] = gate_change(modified_logic[i][0])
