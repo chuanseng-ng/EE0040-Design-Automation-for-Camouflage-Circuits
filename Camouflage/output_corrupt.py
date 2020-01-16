@@ -5,10 +5,11 @@ def corrupt(simulator):
     #   Lists
     corrupt_list = []
     simulation_result = simulator.simulate()
-    # print(simulation_result)
+    print(simulation_result)
     original_result = deepcopy(simulation_result)
     original_logic = deepcopy(simulator.logic_gate)
     modified_logic = deepcopy(original_logic)
+    # count = 0
 
     for i in range(len(original_logic)):
         # Reset input values to 0
@@ -21,6 +22,9 @@ def corrupt(simulator):
         # a = deepcopy(simulator.logic_gate)
         simulator.logic_gate = modified_logic
         # assert a == simulator.logic_gate
+
+        # print(original_logic[count][1])
+        # count += 1
 
         simulation_result = simulator.simulate()
         modified_result = simulation_result

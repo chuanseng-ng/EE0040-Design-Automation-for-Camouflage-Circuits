@@ -39,6 +39,7 @@ def attack(simulator, correct_result_list: list):
             break
 
     # chosen_camo = ['HS65_LH_AND2X4', 'HS65_LH_NAND2X2', 'HS65_LH_NOR2X2']
+    print('\n')
 
     logic_gate_list = deepcopy(simulator.logic_gate)
     camo_gates_indexes = _get_camo_gate_indexes(logic_gate_list)
@@ -61,12 +62,15 @@ def _match_gate_output(correct_result_list: list, user_input_combi: list, camo_g
     for combi in combi_list:
         output_compare_result[combi] = []
     # print(combi_list)
+    count = 0
     for combi in combi_list:
         if len(output_compare_result[combi]) == 0 or output_compare_result[combi][-1] != 'N' or output_compare_result[combi][-1] != '-':
             # print(simulator.logic_gate, '!!!!!')
             for i in range(len(camo_gates_indexes)):
                 simulator.logic_gate[camo_gates_indexes[i]][0] = combi[i]
             # print(simulator.logic_gate, '&&&&&')
+            print('Combination', count, ':')
+            count += 1
             combi_result = simulator.simulate()
             # print(combi_result, '!!!')
 

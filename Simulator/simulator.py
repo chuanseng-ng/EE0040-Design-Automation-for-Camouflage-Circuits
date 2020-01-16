@@ -91,7 +91,7 @@ class Simulator:
             assert output1_value != -1
             wire_list, output_list = self._update_node(wire_list, output_list, output1_location, output1_position, output1_value)
 
-            # Flip flop logic. CS logic: no wire, no flip-flop
+            # Flip flop logic.
             if flip_flop_number != 0:
                 for g in range(flip_flop_number):
                     if len(wire_list) != 0:

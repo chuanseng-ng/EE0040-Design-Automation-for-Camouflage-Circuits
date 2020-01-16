@@ -1,6 +1,12 @@
 # FYP-EEE
 AY19/20 EEE FYP Camouflaging Logic Gates
 
+## Pre-requisites:
+pip install pandas
+Netlists (Clean/Edited) should be placed in '.\\Simulator\\Original Netlist\\Sample' directory
+
+---------------------------------------------------------------------------------------------------------------------------------
+
 ## Part 1:
 Camouflage logic gates based on pre-determined pattern
 
@@ -45,6 +51,10 @@ Allowing selection of logic gates that could be the correct gate
 
 Process flow will be the same as before, but with the removal of the pre-determined pattern
 
+---------------------------------------------------------------------------------------------------------------------------------
 
-Common logic gate simulator:
-Performs simulation on digital logic circuit to produce primary outputs for all input combinations
+## Current issues:
+Flip-flop implemented as a sequential buffer, instead of a clock-based buffer
+Outputs produced might not be completely correct, if circuit is unable to stabilize before simulation cycle upper limit is reached
+
+Long runtime due to metastability declaration printing
