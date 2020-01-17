@@ -3,6 +3,7 @@ AY19/20 EEE FYP Camouflaging Logic Gates
 
 ## Pre-requisites:
 pip install pandas
+
 Netlists (Clean/Edited) should be placed in '.\\Simulator\\Original Netlist\\Sample' directory
 
 ---------------------------------------------------------------------------------------------------------------------------------
