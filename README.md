@@ -6,6 +6,17 @@ pip install pandas
 
 Netlists (Clean/Edited) should be placed in '.\\Simulator\\Original Netlist\\Sample' directory
 
+Modify netlists to suit current library format prior to usage
+
+```
+AND   -> HS65_LH_AND2X4
+OR    -> HS65_LH_OR2X4
+NAND  -> HS65_LH_NAND2X2
+NOR   -> HS65_LH_NOR2X2
+XOR   -> HS65_LHS_XOR2X3
+XNOR  -> HS65_LHS_XNOR2X3
+```
+
 ---------------------------------------------------------------------------------------------------------------------------------
 
 ## Part 1:
@@ -13,7 +24,7 @@ Camouflage logic gates based on pre-determined pattern
 
 ```
 AND <-> NOR
-OR <-> NAND
+OR  <-> NAND
 XOR <-> XNOR
 ```
 
@@ -58,4 +69,4 @@ Process flow will be the same as before, but with the removal of the pre-determi
 Flip-flop implemented as a sequential buffer, instead of a clock-based buffer
 Outputs produced might not be completely correct, if circuit is unable to stabilize before simulation cycle upper limit is reached
 
-Long runtime due to metastability declaration printing
+Long runtime due to metastability declaration analysis
