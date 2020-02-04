@@ -1,46 +1,7 @@
 from copy import deepcopy
 from Utils import up_counter
 
-def attack(simulator, correct_result_list: list):
-    user_input = 0
-    camo_combi = 0
-
-    print("Please input the camouflaged gate combinations, one at a time. \n")
-    print("1 - AND \n")
-    print("2 - NAND \n")
-    print("3 - OR \n")
-    print("4 - NOR \n")
-    print("5 - XOR \n")
-    print("6 - XNOR \n")
-    print("7 - End \n")
-
-    user_input = input("Selection: ")
-    chosen_camo = []
-    while user_input != "7":
-        camo_combi = camo_combi + 1
-        if user_input == "1":
-            chosen_camo.append('HS65_LH_AND2X4')
-            user_input = input("Selection: ")
-        elif user_input == "2":
-            chosen_camo.append('HS65_LH_NAND2X2')
-            user_input = input("Selection: ")
-        elif user_input == "3":
-            chosen_camo.append('HS65_LH_OR2X4')
-            user_input = input("Selection: ")
-        elif user_input == "4":
-            chosen_camo.append('HS65_LH_NOR2X2')
-            user_input = input("Selection: ")
-        elif user_input == "5":
-            chosen_camo.append('HS65_LH_XOR2X3')
-            user_input = input("Selection: ")
-        elif user_input == "6":
-            chosen_camo.append('HS65_LH_XNOR2X3')
-            user_input = input("Selection: ")
-        else:
-            break
-
-    # chosen_camo = ['HS65_LH_AND2X4', 'HS65_LH_NAND2X2', 'HS65_LH_NOR2X2']
-    print('\n')
+def attack(chosen_camo, simulator, correct_result_list: list):
 
     logic_gate_list = deepcopy(simulator.logic_gate)
     camo_gates_indexes = _get_camo_gate_indexes(logic_gate_list)
@@ -63,7 +24,6 @@ def _match_gate_output(correct_result_list: list, user_input_combi: list, camo_g
     for combi in combi_list:
         output_compare_result[combi] = []
     # print(combi_list)
-    count = 0
     
     tmp_input_list = deepcopy(simulator.input_list)
     total_number = 2 ** len(tmp_input_list[0])

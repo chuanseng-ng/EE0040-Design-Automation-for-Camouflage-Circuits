@@ -86,7 +86,7 @@ class Simulator:
                             output1_value = self._logic_output_calc(find, input_values)
             
             if output1_value == -1:
-                print(logic_gate)
+                raise Exception("Unable to simulate! Check files!")
             assert output1_value != -1
             wire_list, output_list = self._update_node(wire_list, output_list, output1_location, output1_position, output1_value)
 

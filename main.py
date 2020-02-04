@@ -5,10 +5,12 @@ import Simulator
 import Camouflage
 import Attack
 import Utils
+import time
 
 # folder_path = os.path.join(os.getcwd(), 'Simulator\\Original Netlist\\Sample')
 
 camo_attack_choice = int(input('\n Choose 1 to camouflage, 2 to attack the logic circuit: '))
+start = time.time()
 try:
     files = Utils.get_verilog_files()
     file_str = '\n Files detected: \n'
@@ -26,12 +28,12 @@ try:
     if camo_attack_choice == 1:
         # file_name = 'camouflage.v'
         # file_path = os.path.join(folder_path, file_name)
-        print(file_path)
-        reader = Simulator.Reader()
+        user_input = input('\n State percentage of gates to be camouflaged.\n Default choice is 10% of total logic gates. (%): ')
+        start = time.time()
 
+        reader = Simulator.Reader()
         input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
         simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
-        user_input = input('\n State percentage of gates to be camouflaged.\n Default choice is 10% of total logic gates. (%): ')
 
         try:
             camo_num = int(int(user_input) * len(simulator.logic_gate) * 0.01)
@@ -48,6 +50,8 @@ try:
             camo_num = int(len(simulator.logic_gate)*0.1)
 
         Camouflage.camouflage(simulator, camo_num)
+        print('\nRuntime: {0:.5f} seconds'.format(time.time() - start))
+
     elif camo_attack_choice == 2:
         camo_choice = int(input('{} Select Camo file: '.format(file_str))) - 1
         if camo_choice < 0 or camo_choice >= len(files):
@@ -58,26 +62,56 @@ try:
             sys.exit()
         camo_file_path = os.path.join(os.getcwd(), 'Netlist\\{}'.format(files[camo_choice]))
 
-        # file_name = 's27_clean.v'
-        # file_path = os.path.join(folder_path, file_name)
+        print("Please input the camouflaged gate combinations, one at a time. \n")
+        print("1 - AND \n")
+        print("2 - NAND \n")
+        print("3 - OR \n")
+        print("4 - NOR \n")
+        print("5 - XOR \n")
+        print("6 - XNOR \n")
+        print("7 - End \n")
+
+        user_input = input("Selection: ")
+        chosen_camo = []
+        while user_input != "7":
+            # camo_combi = camo_combi + 1
+            if user_input == "1":
+                chosen_camo.append('HS65_LH_AND2X4')
+                user_input = input("Selection: ")
+            elif user_input == "2":
+                chosen_camo.append('HS65_LH_NAND2X2')
+                user_input = input("Selection: ")
+            elif user_input == "3":
+                chosen_camo.append('HS65_LH_OR2X4')
+                user_input = input("Selection: ")
+            elif user_input == "4":
+                chosen_camo.append('HS65_LH_NOR2X2')
+                user_input = input("Selection: ")
+            elif user_input == "5":
+                chosen_camo.append('HS65_LH_XOR2X3')
+                user_input = input("Selection: ")
+            elif user_input == "6":
+                chosen_camo.append('HS65_LH_XNOR2X3')
+                user_input = input("Selection: ")
+            else:
+                break
+        print('\n')
+
+        start = time.time()
+
         reader = Simulator.Reader()
         input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(file_path)
         simulator = Simulator.Simulator(file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
         correct_result_list = simulator.simulate()
-        # print(correct_result_list, '???')
 
-        # file_name = 's27_edited.v'
-        # file_path = os.path.join(folder_path, file_name)
         reader = Simulator.Reader()
         input_list, output_list, wire_list, logic_gate, flip_flop = reader.extract(camo_file_path)
         simulator = Simulator.Simulator(camo_file_path, input_list, output_list, wire_list, logic_gate, flip_flop)
-        attack_output, camo_gate_names = Attack.attack(simulator, correct_result_list)
+        attack_output, camo_gate_names = Attack.attack(chosen_camo, simulator, correct_result_list)
 
         print('\n')
         attack_output_keys = list(attack_output.keys())
-        # print(camo_gate_names)
         columns = camo_gate_names + ['Result']
-        # print(columns)
         table_columns = []
         for i in range(len(attack_output_keys)):
             tmp_column = []
@@ -86,9 +120,18 @@ try:
             tmp_column.append(attack_output[attack_output_keys[i]])
             table_columns.append(tmp_column)
         df = pd.DataFrame(table_columns, columns=columns)
-        print(df)
+        print(df.to_string())
+
+        result = [item.tolist() for item in df.values if item[-1][-1] == 'Y']
+        print('\nPossible Correct Combination: ')
+        for item in result:
+            print('{}'.format(item[:-1]))
+
     else:
         print('Invalid choice')
+
+    runtime = time.time() - start
+    print('\nRuntime: {0:} minutes {1:.5f} seconds'.format(int(runtime/60), runtime % 60))
 
 except ValueError:
     print('Invalid menu choice')
