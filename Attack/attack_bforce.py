@@ -1,4 +1,5 @@
 from copy import deepcopy
+from Utils import up_counter
 
 def attack(simulator, correct_result_list: list):
     user_input = 0
@@ -63,23 +64,34 @@ def _match_gate_output(correct_result_list: list, user_input_combi: list, camo_g
         output_compare_result[combi] = []
     # print(combi_list)
     count = 0
-    for combi in combi_list:
-        if len(output_compare_result[combi]) == 0 or output_compare_result[combi][-1] != 'N' or output_compare_result[combi][-1] != '-':
-            # print(simulator.logic_gate, '!!!!!')
-            for i in range(len(camo_gates_indexes)):
-                simulator.logic_gate[camo_gates_indexes[i]][0] = combi[i]
-            # print(simulator.logic_gate, '&&&&&')
-            print('Combination', count, ':')
-            count += 1
-            combi_result = simulator.simulate()
-            # print(combi_result, '!!!')
+    
+    tmp_input_list = deepcopy(simulator.input_list)
+    total_number = 2 ** len(tmp_input_list[0])
+    for j in range(total_number):
+        y_counter = 0
+        for combi in combi_list:
+            if len(output_compare_result[combi]) == 0 or output_compare_result[combi][-1] == 'Y':
+                # print(simulator.logic_gate, '!!!!!')
+                for i in range(len(camo_gates_indexes)):
+                    simulator.logic_gate[camo_gates_indexes[i]][0] = combi[i]
+                # print(simulator.logic_gate, '&&&&&')
+                # print('Combination', count, ':')
+                # count += 1
+                combi_result = simulator.simulate(tmp_input_list=tmp_input_list, partial=True)
+                # print(combi_result, '!!!')
 
-            if combi_result == correct_result_list:
-                output_compare_result[combi].append('Y')
+                if combi_result == correct_result_list[j]:
+                    output_compare_result[combi].append('Y')
+                    y_counter +=1
+                else:
+                    output_compare_result[combi].append('N')
             else:
-                output_compare_result[combi].append('N')
-        else:
-            output_compare_result[combi].append('-')
+                output_compare_result[combi].append('-')
+            # print('result:',output_compare_result)
+        if y_counter == 1:
+            break
+        tmp_input_list = up_counter(tmp_input_list)
+
     return output_compare_result
 
 def _grid_produce(user_input_combi, camo_gates_indexes):
@@ -93,7 +105,8 @@ def _grid_produce(user_input_combi, camo_gates_indexes):
     while(count < total):
         for i in range(camo_gate_num):
             result.append(user_input_combi[idx[i]])
-        
+        if len(idx) == 0:
+            raise Exception('No camo detected in file!')
         count += 1
         idx[-1] += 1
 

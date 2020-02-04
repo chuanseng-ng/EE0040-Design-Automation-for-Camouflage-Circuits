@@ -1,4 +1,5 @@
 from copy import deepcopy
+from Utils import up_counter
 
 class Simulator:
     def __init__(self, file_path, input_list, output_list, wire_list, logic_gate, flip_flop):
@@ -10,11 +11,12 @@ class Simulator:
         self.flip_flop = deepcopy(flip_flop)
         self.find_list = ['_AND','_NAND','_OR','_NOR','_XOR','_XNOR','_IV']
 
-    def simulate(self):
+    def simulate(self, tmp_input_list=[], partial=False) -> list:
         total_number = 2 ** len(self.input_list[0])
 
         result_list = []
-        tmp_input_list = deepcopy(self.input_list)
+        if tmp_input_list == []:
+            tmp_input_list = deepcopy(self.input_list)
 
         for _ in range(total_number):
             if len(self.wire_list) != 0: 
@@ -22,17 +24,14 @@ class Simulator:
                     self.wire_list[1][i] = 0
 
             simulation_result = self._simulate_stable(tmp_input_list, self.output_list, self.wire_list, self.logic_gate, self.flip_flop)
+            if partial:
+                return simulation_result
             result_list.append(simulation_result)
 
-            tmp_input_list[1][len(tmp_input_list[0]) - 1] += 1
+            tmp_input_list = up_counter(tmp_input_list)
 
-            temp_count = len(tmp_input_list[0]) - 1
-            while temp_count > -1:
-                if tmp_input_list[1][temp_count] == 2:
-                    tmp_input_list[1][temp_count] = 0
-                    tmp_input_list[1][temp_count - 1] += 1
-                temp_count -= 1
         return result_list
+
 
     def _simulate_stable(self,input_list, output_list, wire_list, logic_gate, flip_flop, upper_limit=20):
         ''' Simulate until stable by comparing results in each cycle of simulation
