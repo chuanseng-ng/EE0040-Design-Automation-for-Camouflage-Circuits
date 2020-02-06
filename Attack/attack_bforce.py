@@ -28,6 +28,7 @@ def _match_gate_output(correct_result_list: list, user_input_combi: list, camo_g
     tmp_input_list = deepcopy(simulator.input_list)
     total_number = 2 ** len(tmp_input_list[0])
     for j in range(total_number):
+        count = 0
         y_counter = 0
         for combi in combi_list:
             if len(output_compare_result[combi]) == 0 or output_compare_result[combi][-1] == 'Y':
@@ -35,18 +36,19 @@ def _match_gate_output(correct_result_list: list, user_input_combi: list, camo_g
                 for i in range(len(camo_gates_indexes)):
                     simulator.logic_gate[camo_gates_indexes[i]][0] = combi[i]
                 # print(simulator.logic_gate, '&&&&&')
-                # print('Combination', count, ':')
-                # count += 1
+                print('Combination', count, ':')
+                count += 1
                 combi_result = simulator.simulate(tmp_input_list=tmp_input_list, partial=True)
                 # print(combi_result, '!!!')
 
                 if combi_result == correct_result_list[j]:
                     output_compare_result[combi].append('Y')
-                    y_counter +=1
+                    y_counter += 1
                 else:
                     output_compare_result[combi].append('N')
             else:
                 output_compare_result[combi].append('-')
+                count += 1
             # print('result:',output_compare_result)
         if y_counter == 1:
             break

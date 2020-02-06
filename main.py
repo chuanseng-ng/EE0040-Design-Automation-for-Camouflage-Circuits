@@ -26,8 +26,6 @@ try:
     file_path = os.path.join(os.getcwd(), 'Netlist\\{}'.format(files[choice]))
 
     if camo_attack_choice == 1:
-        # file_name = 'camouflage.v'
-        # file_path = os.path.join(folder_path, file_name)
         user_input = input('\n State percentage of gates to be camouflaged.\n Default choice is 10% of total logic gates. (%): ')
         start = time.time()
 
@@ -62,7 +60,7 @@ try:
             sys.exit()
         camo_file_path = os.path.join(os.getcwd(), 'Netlist\\{}'.format(files[camo_choice]))
 
-        print("Please input the camouflaged gate combinations, one at a time. \n")
+        print("\nPlease input the camouflaged gate combinations, one at a time. \n")
         print("1 - AND \n")
         print("2 - NAND \n")
         print("3 - OR \n")
@@ -74,7 +72,6 @@ try:
         user_input = input("Selection: ")
         chosen_camo = []
         while user_input != "7":
-            # camo_combi = camo_combi + 1
             if user_input == "1":
                 chosen_camo.append('HS65_LH_AND2X4')
                 user_input = input("Selection: ")
@@ -122,15 +119,20 @@ try:
         df = pd.DataFrame(table_columns, columns=columns)
         print(df.to_string())
 
+        count = 0
         result = [item.tolist() for item in df.values if item[-1][-1] == 'Y']
         print('\nPossible Correct Combination: ')
         for item in result:
             print('{}'.format(item[:-1]))
+            count += 1
+        print('\nNumber of tries: {}' .format(len(df.values[-1][-1])))
+        print('\nNumber of possible combinations: {}' .format(count))
 
     else:
         print('Invalid choice')
 
     runtime = time.time() - start
+    #print('\nRuntime: {} seconds'.format(runtime))
     print('\nRuntime: {0:} minutes {1:.5f} seconds'.format(int(runtime/60), runtime % 60))
 
 except ValueError:

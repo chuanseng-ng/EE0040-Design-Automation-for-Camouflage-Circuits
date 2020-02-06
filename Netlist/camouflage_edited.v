@@ -9,7 +9,7 @@ output Q1,Q2,Q3;
 
 wire n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13;
 
-HS65_LH_CAMO2X4 U1 (.Z(n1), .A(n6), .B(a) );
+HS65_LH_OR2X4 U1 (.Z(n1), .A(n6), .B(a) );
 
 HS65_LH_CAMO2X2 U2 (.Z(n2), .A(c), .B(d) );
 
@@ -22,7 +22,7 @@ HS65_LH_DFPRQX4 U7 (.D(n5), .CP(n12), .RN(n13), .Q(n7) );
 
 HS65_LH_NAND2X2 U8 (.Z(n6), .A(Q3), .B(n5) );
 
-HS65_LHS_CAMO2X3 U9 (.Z(n8), .A(n7), .B(n6) );
+HS65_LHS_XOR2X3 U9 (.Z(n8), .A(n7), .B(n6) );
 
 HS65_LH_DFPRQX4 U10 (.D(n6), .CP(n10), .RN(n13), .Q(Q1) );
 

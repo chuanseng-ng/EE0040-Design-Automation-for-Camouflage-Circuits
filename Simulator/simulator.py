@@ -33,7 +33,7 @@ class Simulator:
         return result_list
 
 
-    def _simulate_stable(self,input_list, output_list, wire_list, logic_gate, flip_flop, upper_limit=20):
+    def _simulate_stable(self, input_list, output_list, wire_list, logic_gate, flip_flop, upper_limit=20):
         ''' Simulate until stable by comparing results in each cycle of simulation
         '''
         result_output_list = []
@@ -54,7 +54,7 @@ class Simulator:
         return result_output_list[-1][1]
 
     # Function definition
-    def _simulate_cycle(self,input_list, output_list, wire_list, logic_gate, flip_flop, first_cycle=False):
+    def _simulate_cycle(self, input_list, output_list, wire_list, logic_gate, flip_flop, first_cycle=False):
         ''' Simulates one cycle
         '''
         # name of input: number of inputs
@@ -108,7 +108,7 @@ class Simulator:
                                         output_list[1][j] = wire_list[1][h]
         return output_list, wire_list
 
-    def _input_match(self,input_list, gate, param_num):
+    def _input_match(self, input_list, gate, param_num):
         values_list = [0]*param_num
         for i in range(len(input_list[0])):
             for j in range(param_num):
@@ -116,7 +116,7 @@ class Simulator:
                     values_list[j] = input_list[1][i]
         return values_list
 
-    def _wire_match(self,input_values, wire_list, gate, output1_location, output1_position, param_num):
+    def _wire_match(self, input_values, wire_list, gate, output1_location, output1_position, param_num):
         values_list = deepcopy(input_values)
         if len(wire_list) != 0:
             for i in range(len(wire_list[0])):
@@ -129,7 +129,7 @@ class Simulator:
             return values_list, output1_location, output1_position
         return input_values, output1_location, output1_position
 
-    def _output_match(self,input_values, output_list, gate, param_num):
+    def _output_match(self, input_values, output_list, gate, param_num):
         values_list = deepcopy(input_values)
         for i in range(len(output_list[0])):
             for j in range(param_num):
@@ -137,7 +137,7 @@ class Simulator:
                     values_list[j] = output_list[1][i]
         return values_list
 
-    def _logic_output_match(self,gate, output1_location, output1_position, output_list):
+    def _logic_output_match(self, gate, output1_location, output1_position, output_list):
         if output1_location == 0:
             for i in range(len(output_list[0])):
                 if gate[2] == output_list[0][i]:
@@ -145,7 +145,7 @@ class Simulator:
                     output1_position = i
         return output1_location, output1_position
 
-    def _logic_output_calc(self,gate_type: str, input_values: list):
+    def _logic_output_calc(self, gate_type: str, input_values: list):
         if gate_type == '_AND':
             for value in input_values:
                 if value == 0:
@@ -167,7 +167,7 @@ class Simulator:
                     return 0
             return 1
         elif gate_type == '_XOR':
-            count = [0,0]
+            count = [0, 0]
             for value in input_values:
                 if value == 0:
                     count[0] += 1
@@ -177,7 +177,7 @@ class Simulator:
                 return 0
             return 1
         elif gate_type == '_XNOR':
-            count = [0,0]
+            count = [0, 0]
             for value in input_values:
                 if value == 0:
                     count[0] += 1
@@ -196,7 +196,7 @@ class Simulator:
         else:
             raise Exception('Logic gate unknown.')
 
-    def _update_node(self,wire_list, output_list, output1_location, output1_position, output1_value):
+    def _update_node(self, wire_list, output_list, output1_location, output1_position, output1_value):
         ''' Returns updated wire_list, output_list
         '''
         if output1_location == 1:
