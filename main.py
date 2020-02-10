@@ -132,8 +132,13 @@ try:
         print('Invalid choice')
 
     runtime = time.time() - start
-    #print('\nRuntime: {} seconds'.format(runtime))
-    print('\nRuntime: {0:} minutes {1:.5f} seconds'.format(int(runtime/60), runtime % 60))
+    print('\nRuntime: {} seconds'.format(runtime))
+    if((runtime/60) == 0):
+        print('\nRuntime: {0:.5f} seconds'.format(runtime))
+    elif((runtime/3600) == 0):
+        print('\nRuntime: {0:} minutes {1:.5f} seconds'.format(int(runtime/60), runtime % 60))
+    else:
+        print('\nRuntime: {0:} hours {1:} minutes {2:.5f} seconds'.format(int(runtime/3600), int((runtime/60) % 60), runtime % 3600))
 
 except ValueError:
     print('Invalid menu choice')
