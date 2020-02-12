@@ -48,7 +48,7 @@ try:
             camo_num = int(len(simulator.logic_gate)*0.1)
 
         Camouflage.camouflage(simulator, camo_num)
-        print('\nRuntime: {0:.5f} seconds'.format(time.time() - start))
+        #print('\nRuntime: {0:.5f} seconds'.format(time.time() - start))
 
     elif camo_attack_choice == 2:
         camo_choice = int(input('{} Select Camo file: '.format(file_str))) - 1
@@ -132,12 +132,12 @@ try:
         print('Invalid choice')
 
     runtime = time.time() - start
-    print('\nRuntime: {} seconds'.format(runtime))
-    if((runtime/60) == 0):
+    #print('\nRuntime: {} seconds'.format(runtime))
+    if(int(runtime/60) == 0):
         print('\nRuntime: {0:.5f} seconds'.format(runtime))
-    elif((runtime/3600) == 0):
+    elif(int(runtime/3600) == 0):
         print('\nRuntime: {0:} minutes {1:.5f} seconds'.format(int(runtime/60), runtime % 60))
-    else:
+    elif(int(runtime/3600) != 0):
         print('\nRuntime: {0:} hours {1:} minutes {2:.5f} seconds'.format(int(runtime/3600), int((runtime/60) % 60), runtime % 3600))
 
 except ValueError:
