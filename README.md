@@ -14,8 +14,8 @@
   - [Current Issues/Future Works: <br/>](#current-issuesfuture-works-br)
     - [Clock-based Flip-flop <br/>](#clock-based-flip-flop-br)
     - [Sensitization <br/>](#sensitization-br)
-    - [Compounded Output Corruptibility <br/>](#compounded-output-corruptibility-br)
-    - [CPU/GPU Processing Capability](#cpugpu-processing-capability)
+    - [Compounded Output Corruptibility](#compounded-output-corruptibility-)
+    - [CPU/GPU Processing Capability](#cpugpu-processing-capability-)
 
 ---
 
