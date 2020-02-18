@@ -15,7 +15,7 @@
     - [Clock-based Flip-flop <br/>](#clock-based-flip-flop-br)
     - [Sensitization <br/>](#sensitization-br)
     - [Compounded Output Corruptibility <br/>](#compounded-output-corruptibility-br)
-    - [CPU/GPU Processing Capability <br/>](#cpugpu-processing-capability-br)
+    - [CPU/GPU Processing Capability](#cpugpu-processing-capability)
 
 ---
 
