@@ -22,6 +22,7 @@
 
 Install pandas in order for algorithm to operate as intended <br/>
 `pip install pandas` <br/>
+`pip install tqdm` <br/>
 
 ---
 
