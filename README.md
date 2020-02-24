@@ -12,13 +12,14 @@
     - [Part 3 (User-selected Camouflage Attack)](#part-3-user-selected-camouflage-attack-)
   - [Current Issues/Future Works:](#current-issuesfuture-works-)
     - [Clock-based Flip-flop](#clock-based-flip-flop-)
-    - [Sensitization](#sensitization-)
     - [Compounded Output Corruptibility](#compounded-output-corruptibility-)
+    - [Sensitization](#sensitization-)
+    - [Customizable Logic Gate Attack Pattern](#customizable-logic-gate-attack-pattern-)
     - [CPU/GPU Processing Capability](#cpugpu-processing-capability-)
 
 ---
 
-## Required Python Modules <br/>
+## Required Python Modules
 
 Install pandas in order for algorithm to operate as intended <br/>
 `pip install pandas` <br/>
@@ -26,7 +27,7 @@ Install pandas in order for algorithm to operate as intended <br/>
 
 ---
 
-## Set-up <br/>
+## Set-up
 
 Netlists (Clean/Edited) should be placed in '.\\Netlist' directory <br/>
 Modify netlist to suit current library prior to usage <br/>
@@ -52,7 +53,7 @@ If in doubt, use existing files in '.\Netlist' as reference <br/> <br/>
 
 ---
 
-## Walkthrough: <br/>
+## Walkthrough:
 
 Hands-on guide on executing Camouflage and Attack <br/>
 
@@ -68,7 +69,7 @@ Next prompt will ask user to choose clean netlist from '.\\Netlist' directory <b
 
 ---
 
-### Camouflage <br/>
+### Camouflage
 
 If 1 is selected, prompt will request for user-inputted percentage of logic gates to be camouflage <br/>
 `State percentage of gates to be camouflaged.\n ` <br/>
@@ -80,7 +81,7 @@ Total number of logic gates that is camouflaged will be prompted, along with the
 
 ---
 
-### Attack <br/>
+### Attack
 
 If 2 is selected, prompt will ask user to choose camouflaged netlist from '.\\Netlist' directory <br/>
 `Select Camo file:` <br/>
@@ -108,9 +109,9 @@ Total time used to execute each process will be prompted after the process is co
 
 ---
 
-## Process Flow: <br/>
+## Process Flow:
 
-### Part 1 (Camouflage Implementation) <br/>
+### Part 1 (Camouflage Implementation)
 
 Camouflage logic gates based on pre-determined pattern <br/>
 
@@ -132,7 +133,7 @@ Example: <br/>
 
 ---
 
-### Part 2 (Camouflage Attack) <br/>
+### Part 2 (Camouflage Attack)
 
 Attacking camouflaged logic circuit to reveal original functionality of camouflaged logic gates <br/>
 2 possible methods - <br/>
@@ -143,7 +144,7 @@ Method 2 is faster than method 1 <br/>
 
 ---
 
-### Part 3 (User-selected Camouflage Attack) <br/>
+### Part 3 (User-selected Camouflage Attack)
 
 Allowing selection of logic gates that could be the correct gate <br/>
 
@@ -165,9 +166,9 @@ Full iteration algorithm can be analyzed [here](https://github.com/waelectriz/EE
 
 ---
 
-## Current Issues/Future Works: <br/>
+## Current Issues/Future Works:
 
-### Clock-based Flip-flop <br/>
+### Clock-based Flip-flop
 
 Flip-flop implemented as a sequential buffer, instead of a clock-based buffer <br/>
 Outputs produced might not be completely correct, if circuit is unable to stabilize before simulation cycle upper limit is reached <br/>
@@ -176,18 +177,7 @@ Long runtime due to metastability analysis can also be eliminated when a global 
 
 ---
 
-### Sensitization <br/>
-
-Implement camouflaged logic gate sensitization <br/>
-
-Sensitization is the process in which the primary inputs are traced towards the camouflaged logic gates' inputs, and the primary outputs are traced backwards to the camouflaged logic gates' outputs <br/>
-This helps to determine the complete or partial functionality of the camouflaged logic gates <br/>
-
-However, sensitization is only to reveal the partial functionality of cascaded camouflaged logic gates <br/>
-
----
-
-### Compounded Output Corruptibility <br/>
+### Compounded Output Corruptibility
 
 Analyze suitability for logic gates to be camouflaged with relation to each other <br/>
 Compounded output corruptibility calculation instead of current simple one <br/>
@@ -199,7 +189,33 @@ Example: <br/>
 
 ---
 
-### CPU/GPU Processing Capability <br/>
+### Sensitization
+
+Implement camouflaged logic gate sensitization <br/>
+
+Sensitization is the process in which the primary inputs are traced towards the camouflaged logic gates' inputs, and the primary outputs are traced backwards to the camouflaged logic gates' outputs <br/>
+This helps to determine the complete or partial functionality of the camouflaged logic gates <br/>
+
+However, sensitization is only to reveal the partial functionality of cascaded camouflaged logic gates <br/>
+
+---
+
+### Customizable Logic Gate Attack Pattern
+
+Implement logic gate attack combination generation based on logic gate types shown in netlist <br/>
+
+Example: <br/>
+- Current algorithm generates all logic gate types for all camouflaged gates regardless of whether camouflaged gate is of that logic gate type <br/>
+  `User-input: 1 2 3 4 5 6` <br/>
+  User-input shown above will always generate logic gate combinations for all six logic gate types <br/>
+- Proposed algorithm will generate logic gate types for camouflaged gates based on their logic gate types shown in netlist <br/>
+  `AND/XOR NOR/NAND OR/XNOR`
+  Logic gate types shown above will only generate logic gate combinations based on the valid logic gate types.
+  In this example, the first logic gate will only be tested for AND and XOR logic gates, the second will be tested for NOR and NAND logic gates and the third will be tested for OR and XNOR logic gates <br/>
+
+---
+
+### CPU/GPU Processing Capability
 
 Implementation of CPU Parallel Processing or GPU Processing to reduce the execution time <br/>
 CPU excels in doing multiple tasks at the same time, while GPU excels in doing one task very quickly <br/>
