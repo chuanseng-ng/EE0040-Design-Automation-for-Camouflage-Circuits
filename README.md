@@ -1,33 +1,33 @@
 # AY19/20 EEE FYP A2068-191 <br/>
 
-- [AY19/20 EEE FYP A2068-191](#ay1920-eee-fyp-a2068-191-)
-  - [Required Python Modules](#required-python-modules-)
-  - [Set-up](#set-up-)
-  - [Walkthrough:](#walkthrough-)
-    - [Camouflage](#camouflage-)
-    - [Attack](#attack-)
-  - [Process Flow:](#process-flow-)
-    - [Part 1 (Camouflage Implementation)](#part-1-camouflage-implementation-)
-    - [Part 2 (Camouflage Attack)](#part-2-camouflage-attack-)
-    - [Part 3 (User-selected Camouflage Attack)](#part-3-user-selected-camouflage-attack-)
-  - [Current Issues/Future Works:](#current-issuesfuture-works-)
-    - [Clock-based Flip-flop](#clock-based-flip-flop-)
-    - [Compounded Output Corruptibility](#compounded-output-corruptibility-)
-    - [Sensitization](#sensitization-)
-    - [Customizable Logic Gate Attack Pattern](#customizable-logic-gate-attack-pattern-)
-    - [CPU/GPU Processing Capability](#cpugpu-processing-capability-)
+- [AY19/20 EEE FYP A2068-191 <br/>](#ay1920-eee-fyp-a2068-191-br)
+  - [Required Python Modules <br/>](#required-python-modules-br)
+  - [Set-up <br/>](#set-up-br)
+  - [Walkthrough: <br/>](#walkthrough-br)
+    - [Camouflage <br/>](#camouflage-br)
+    - [Attack <br/>](#attack-br)
+    - [Execution Time <br/>](#execution-time-br)
+  - [Process Flow: <br/>](#process-flow-br)
+    - [Part 1 (Camouflage Implementation) <br/>](#part-1-camouflage-implementation-br)
+    - [Part 2 (Camouflage Attack) <br/>](#part-2-camouflage-attack-br)
+    - [Part 3 (User-selected Camouflage Attack) <br/>](#part-3-user-selected-camouflage-attack-br)
+  - [Current Issues/Future Works: <br/>](#current-issuesfuture-works-br)
+    - [Clock-based Flip-flop <br/>](#clock-based-flip-flop-br)
+    - [Compounded Output Corruptibility <br/>](#compounded-output-corruptibility-br)
+    - [Sensitization <br/>](#sensitization-br)
+    - [Customizable Logic Gate Attack Pattern <br/>](#customizable-logic-gate-attack-pattern-br)
+    - [CPU/GPU Processing Capability <br/>](#cpugpu-processing-capability-br)
 
 ---
 
-## Required Python Modules
+## Required Python Modules <br/>
 
 Install pandas in order for algorithm to operate as intended <br/>
 `pip install pandas` <br/>
-`pip install tqdm` <br/>
 
 ---
 
-## Set-up
+## Set-up <br/>
 
 Netlists (Clean/Edited) should be placed in '.\\Netlist' directory <br/>
 Modify netlist to suit current library prior to usage <br/>
@@ -53,7 +53,7 @@ If in doubt, use existing files in '.\Netlist' as reference <br/> <br/>
 
 ---
 
-## Walkthrough:
+## Walkthrough: <br/>
 
 Hands-on guide on executing Camouflage and Attack <br/>
 
@@ -69,7 +69,7 @@ Next prompt will ask user to choose clean netlist from '.\\Netlist' directory <b
 
 ---
 
-### Camouflage
+### Camouflage <br/>
 
 If 1 is selected, prompt will request for user-inputted percentage of logic gates to be camouflage <br/>
 `State percentage of gates to be camouflaged.\n ` <br/>
@@ -81,7 +81,7 @@ Total number of logic gates that is camouflaged will be prompted, along with the
 
 ---
 
-### Attack
+### Attack <br/>
 
 If 2 is selected, prompt will ask user to choose camouflaged netlist from '.\\Netlist' directory <br/>
 `Select Camo file:` <br/>
@@ -109,9 +109,24 @@ Total time used to execute each process will be prompted after the process is co
 
 ---
 
-## Process Flow:
+### Execution Time <br/>
 
-### Part 1 (Camouflage Implementation)
+The execution time for each process are shown in the '.\Statistics' directory <br/>
+
+```
+Testing System Specs:
+- CPU: i7-2670QM @ 2.20GHz
+- RAM: 8GB DDR3 1600MHz
+- GPU: GT555M
+```
+
+However, execution time is long due to under-utilization and inefficient usage of CPU <br/> <br/>
+
+---
+
+## Process Flow: <br/>
+
+### Part 1 (Camouflage Implementation) <br/>
 
 Camouflage logic gates based on pre-determined pattern <br/>
 
@@ -133,7 +148,7 @@ Example: <br/>
 
 ---
 
-### Part 2 (Camouflage Attack)
+### Part 2 (Camouflage Attack) <br/>
 
 Attacking camouflaged logic circuit to reveal original functionality of camouflaged logic gates <br/>
 2 possible methods - <br/>
@@ -144,7 +159,7 @@ Method 2 is faster than method 1 <br/>
 
 ---
 
-### Part 3 (User-selected Camouflage Attack)
+### Part 3 (User-selected Camouflage Attack) <br/>
 
 Allowing selection of logic gates that could be the correct gate <br/>
 
@@ -166,9 +181,9 @@ Full iteration algorithm can be analyzed [here](https://github.com/waelectriz/EE
 
 ---
 
-## Current Issues/Future Works:
+## Current Issues/Future Works: <br/>
 
-### Clock-based Flip-flop
+### Clock-based Flip-flop <br/>
 
 Flip-flop implemented as a sequential buffer, instead of a clock-based buffer <br/>
 Outputs produced might not be completely correct, if circuit is unable to stabilize before simulation cycle upper limit is reached <br/>
@@ -177,7 +192,7 @@ Long runtime due to metastability analysis can also be eliminated when a global 
 
 ---
 
-### Compounded Output Corruptibility
+### Compounded Output Corruptibility <br/>
 
 Analyze suitability for logic gates to be camouflaged with relation to each other <br/>
 Compounded output corruptibility calculation instead of current simple one <br/>
@@ -189,7 +204,7 @@ Example: <br/>
 
 ---
 
-### Sensitization
+### Sensitization <br/>
 
 Implement camouflaged logic gate sensitization <br/>
 
@@ -200,22 +215,22 @@ However, sensitization is only to reveal the partial functionality of cascaded c
 
 ---
 
-### Customizable Logic Gate Attack Pattern
+### Customizable Logic Gate Attack Pattern <br/>
 
 Implement logic gate attack combination generation based on logic gate types shown in netlist <br/>
 
 Example: <br/>
 - Current algorithm generates all logic gate types for all camouflaged gates regardless of whether camouflaged gate is of that logic gate type <br/>
-  `User-input: 1 2 3 4 5 6` <br/>
-  User-input shown above will always generate logic gate combinations for all six logic gate types <br/>
+  - `User-input: 1 2 3 4 5 6` <br/>
+  - User-input shown above will always generate logic gate combinations for all six logic gate types <br/>
 - Proposed algorithm will generate logic gate types for camouflaged gates based on their logic gate types shown in netlist <br/>
-  `AND/XOR NOR/NAND OR/XNOR`
-  Logic gate types shown above will only generate logic gate combinations based on the valid logic gate types.
-  In this example, the first logic gate will only be tested for AND and XOR logic gates, the second will be tested for NOR and NAND logic gates and the third will be tested for OR and XNOR logic gates <br/>
+  - `AND/XOR NOR/NAND OR/XNOR` <br/>
+  - Logic gate types shown above will only generate logic gate combinations based on the valid logic gate types <br/>
+  - In this example, the first logic gate will only be tested for AND and XOR logic gates, the second will be tested for NOR and NAND logic gates and the third will be tested for OR and XNOR logic gates <br/>
 
 ---
 
-### CPU/GPU Processing Capability
+### CPU/GPU Processing Capability <br/>
 
 Implementation of CPU Parallel Processing or GPU Processing to reduce the execution time <br/>
 CPU excels in doing multiple tasks at the same time, while GPU excels in doing one task very quickly <br/>
