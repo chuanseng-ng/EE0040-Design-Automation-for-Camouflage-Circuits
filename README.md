@@ -1,33 +1,34 @@
-# AY19/20 EEE FYP A2068-191 <br/>
+# AY19/20 EEE FYP A2068-191
 
-- [AY19/20 EEE FYP A2068-191 <br/>](#ay1920-eee-fyp-a2068-191-br)
-  - [Required Python Modules <br/>](#required-python-modules-br)
-  - [Set-up <br/>](#set-up-br)
-  - [Walkthrough: <br/>](#walkthrough-br)
-    - [Camouflage <br/>](#camouflage-br)
-    - [Attack <br/>](#attack-br)
-    - [Execution Time <br/>](#execution-time-br)
-  - [Process Flow: <br/>](#process-flow-br)
-    - [Part 1 (Camouflage Implementation) <br/>](#part-1-camouflage-implementation-br)
-    - [Part 2 (Camouflage Attack) <br/>](#part-2-camouflage-attack-br)
-    - [Part 3 (User-selected Camouflage Attack) <br/>](#part-3-user-selected-camouflage-attack-br)
-  - [Current Issues/Future Works: <br/>](#current-issuesfuture-works-br)
-    - [Clock-based Flip-flop <br/>](#clock-based-flip-flop-br)
-    - [Compounded Output Corruptibility <br/>](#compounded-output-corruptibility-br)
-    - [Sensitization <br/>](#sensitization-br)
-    - [Customizable Logic Gate Attack Pattern <br/>](#customizable-logic-gate-attack-pattern-br)
-    - [CPU/GPU Processing Capability <br/>](#cpugpu-processing-capability-br)
+- [AY19/20 EEE FYP A2068-191](#ay1920-eee-fyp-a2068-191)
+  - [Required Python Modules](#required-python-modules)
+  - [Set-up](#set-up)
+  - [Walkthrough:](#walkthrough)
+    - [Camouflage](#camouflage)
+    - [Attack](#attack)
+    - [Execution Time](#execution-time)
+  - [Process Flow:](#process-flow)
+    - [Part 1 (Camouflage Implementation)](#part-1-camouflage-implementation)
+    - [Part 2 (Camouflage Attack)](#part-2-camouflage-attack)
+    - [Part 3 (User-selected Camouflage Attack)](#part-3-user-selected-camouflage-attack)
+  - [Current Issues/Future Works:](#current-issuesfuture-works)
+    - [Clock-based Flip-flop](#clock-based-flip-flop)
+    - [Compounded Output Corruptibility](#compounded-output-corruptibility)
+    - [Sensitization](#sensitization)
+    - [Customizable Logic Gate Attack Pattern](#customizable-logic-gate-attack-pattern)
+    - [CPU/GPU Processing Capability](#cpugpu-processing-capability)
 
 ---
 
-## Required Python Modules <br/>
+## Required Python Modules
 
 Install pandas in order for algorithm to operate as intended <br/>
 `pip install pandas` <br/>
+`pip install tqdm` <br/>
 
 ---
 
-## Set-up <br/>
+## Set-up
 
 Netlists (Clean/Edited) should be placed in '.\\Netlist' directory <br/>
 Modify netlist to suit current library prior to usage <br/>
@@ -53,7 +54,7 @@ If in doubt, use existing files in '.\Netlist' as reference <br/> <br/>
 
 ---
 
-## Walkthrough: <br/>
+## Walkthrough:
 
 Hands-on guide on executing Camouflage and Attack <br/>
 
@@ -69,7 +70,7 @@ Next prompt will ask user to choose clean netlist from '.\\Netlist' directory <b
 
 ---
 
-### Camouflage <br/>
+### Camouflage
 
 If 1 is selected, prompt will request for user-inputted percentage of logic gates to be camouflage <br/>
 `State percentage of gates to be camouflaged.\n ` <br/>
@@ -81,7 +82,7 @@ Total number of logic gates that is camouflaged will be prompted, along with the
 
 ---
 
-### Attack <br/>
+### Attack
 
 If 2 is selected, prompt will ask user to choose camouflaged netlist from '.\\Netlist' directory <br/>
 `Select Camo file:` <br/>
@@ -109,7 +110,7 @@ Total time used to execute each process will be prompted after the process is co
 
 ---
 
-### Execution Time <br/>
+### Execution Time
 
 The execution time for each process are shown in the '.\Statistics' directory <br/>
 
@@ -124,9 +125,9 @@ However, execution time is long due to under-utilization and inefficient usage o
 
 ---
 
-## Process Flow: <br/>
+## Process Flow:
 
-### Part 1 (Camouflage Implementation) <br/>
+### Part 1 (Camouflage Implementation)
 
 Camouflage logic gates based on pre-determined pattern <br/>
 
@@ -148,7 +149,7 @@ Example: <br/>
 
 ---
 
-### Part 2 (Camouflage Attack) <br/>
+### Part 2 (Camouflage Attack)
 
 Attacking camouflaged logic circuit to reveal original functionality of camouflaged logic gates <br/>
 2 possible methods - <br/>
@@ -159,7 +160,7 @@ Method 2 is faster than method 1 <br/>
 
 ---
 
-### Part 3 (User-selected Camouflage Attack) <br/>
+### Part 3 (User-selected Camouflage Attack)
 
 Allowing selection of logic gates that could be the correct gate <br/>
 
@@ -181,9 +182,9 @@ Full iteration algorithm can be analyzed [here](https://github.com/waelectriz/EE
 
 ---
 
-## Current Issues/Future Works: <br/>
+## Current Issues/Future Works:
 
-### Clock-based Flip-flop <br/>
+### Clock-based Flip-flop
 
 Flip-flop implemented as a sequential buffer, instead of a clock-based buffer <br/>
 Outputs produced might not be completely correct, if circuit is unable to stabilize before simulation cycle upper limit is reached <br/>
@@ -192,7 +193,7 @@ Long runtime due to metastability analysis can also be eliminated when a global 
 
 ---
 
-### Compounded Output Corruptibility <br/>
+### Compounded Output Corruptibility
 
 Analyze suitability for logic gates to be camouflaged with relation to each other <br/>
 Compounded output corruptibility calculation instead of current simple one <br/>
@@ -204,7 +205,7 @@ Example: <br/>
 
 ---
 
-### Sensitization <br/>
+### Sensitization
 
 Implement camouflaged logic gate sensitization <br/>
 
@@ -215,7 +216,7 @@ However, sensitization is only to reveal the partial functionality of cascaded c
 
 ---
 
-### Customizable Logic Gate Attack Pattern <br/>
+### Customizable Logic Gate Attack Pattern
 
 Implement logic gate attack combination generation based on logic gate types shown in netlist <br/>
 
@@ -230,7 +231,7 @@ Example: <br/>
 
 ---
 
-### CPU/GPU Processing Capability <br/>
+### CPU/GPU Processing Capability
 
 Implementation of CPU Parallel Processing or GPU Processing to reduce the execution time <br/>
 CPU excels in doing multiple tasks at the same time, while GPU excels in doing one task very quickly <br/>
