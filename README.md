@@ -6,7 +6,6 @@
   - [Walkthrough:](#walkthrough)
     - [Camouflage](#camouflage)
     - [Attack](#attack)
-    - [Execution Time](#execution-time)
   - [Process Flow:](#process-flow)
     - [Part 1 (Camouflage Implementation)](#part-1-camouflage-implementation)
     - [Part 2 (Camouflage Attack)](#part-2-camouflage-attack)
@@ -107,21 +106,6 @@ All possible logic gate combinations will be prompted once the attack analysis i
 The total number of tries and logic gate combinations will also be prompted <br/>
 
 Total time used to execute each process will be prompted after the process is completed <br/> <br/>
-
----
-
-### Execution Time
-
-The execution time for each process are shown in the '.\Statistics' directory <br/>
-
-```
-Testing System Specs:
-- CPU: i7-2670QM @ 2.20GHz
-- RAM: 8GB DDR3 1600MHz
-- GPU: GT555M
-```
-
-However, execution time is long due to under-utilization and inefficient usage of CPU <br/> <br/>
 
 ---
 
