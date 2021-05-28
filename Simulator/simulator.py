@@ -3,13 +3,13 @@ from Utils import up_counter
 
 class Simulator:
     def __init__(self, file_path, input_list, output_list, wire_list, logic_gate, flip_flop):
-        self.file_path = file_path
-        self.input_list = deepcopy(input_list)
-        self.output_list = deepcopy(output_list)
-        self.wire_list = deepcopy(wire_list)
-        self.logic_gate = deepcopy(logic_gate)
-        self.flip_flop = deepcopy(flip_flop)
-        self.find_list = ['_AND','_NAND','_OR','_NOR','_XOR','_XNOR','_IV']
+        self.file_path      = file_path
+        self.input_list     = deepcopy(input_list)
+        self.output_list    = deepcopy(output_list)
+        self.wire_list      = deepcopy(wire_list)
+        self.logic_gate     = deepcopy(logic_gate)
+        self.flip_flop      = deepcopy(flip_flop)
+        self.find_list      = ['_AND','_NAND','_OR','_NOR','_XOR','_XNOR','_IV']
 
     def simulate(self, tmp_input_list=[], partial=False) -> list:
         total_number = 2 ** len(self.input_list[0])
@@ -37,8 +37,8 @@ class Simulator:
         ''' Simulate until stable by comparing results in each cycle of simulation
         '''
         result_output_list = []
-        tmp_result_output = deepcopy(output_list)
-        tmp_result_wire = deepcopy(wire_list)
+        tmp_result_output   = deepcopy(output_list)
+        tmp_result_wire     = deepcopy(wire_list)
         for i in range(upper_limit):
             if i < 2:
                 tmp_result_output, tmp_result_wire = self._simulate_cycle(input_list, tmp_result_output, tmp_result_wire, logic_gate, flip_flop, True)
@@ -60,12 +60,12 @@ class Simulator:
         # name of input: number of inputs
         input_param_names = {'2X':2, '3X':3, '4X':4, 'IVX2':1}
 
-        output_number = len(output_list[0])
-        flip_flop_number = len(flip_flop)
+        output_number       = len(output_list[0])
+        flip_flop_number    = len(flip_flop)
 
-        output1_position = 0
-        output1_location = 0
-        output1_value = -1
+        output1_position    = 0
+        output1_location    = 0
+        output1_value       = -1
 
         for gate in logic_gate:
             output1_location = 0

@@ -1,25 +1,25 @@
 class Reader:
     def __init__(self):
-        self.find_gate = '.A'
-        self.find_flip = '.D'
-        self.find_input = 'input'
-        self.find_output = 'output'
-        self.find_wire = 'wire'
+        self.find_gate      = '.A'
+        self.find_flip      = '.D'
+        self.find_input     = 'input'
+        self.find_output    = 'output'
+        self.find_wire      = 'wire'
 
-        self.input_number = 0
-        self.output_number = 0
-        self.wire_number = 0
+        self.input_number   = 0
+        self.output_number  = 0
+        self.wire_number    = 0
 
     def extract(self, file_name):
         # Variables declaration
         #   Lists
         # Read file and store them into list of strings
         input_list, output_list, gate_list, flip_list, wire_list = self._extract_lists(file_name)
-        input_list = self._process_lists('input', input_list)
+        input_list  = self._process_lists('input', input_list)
         output_list = self._process_lists('output', output_list)
-        wire_list = self._process_lists('wire', wire_list)
-        logic_gate = self._process_logic_lists('logic_gate', gate_list)
-        flip_flop = self._process_logic_lists('flip_flop', flip_list)
+        wire_list   = self._process_lists('wire', wire_list)
+        logic_gate  = self._process_logic_lists('logic_gate', gate_list)
+        flip_flop   = self._process_logic_lists('flip_flop', flip_list)
         # print(input_list, output_list, wire_list, logic_gate, flip_flop)
 
         return input_list, output_list, wire_list, logic_gate, flip_flop
@@ -29,11 +29,11 @@ class Reader:
             line_list = [line.rstrip('\n') for line in f]
         # Finding keywords from list of string
         #   List[1] is to store values
-        input_list = []
+        input_list  = []
         output_list = []
-        gate_list = []
-        flip_list = []
-        wire_list = []
+        gate_list   = []
+        flip_list   = []
+        wire_list   = []
         for line in line_list:
             if self.find_input in line:
                 input_list.append(line.strip())
@@ -52,9 +52,9 @@ class Reader:
         return input_list, output_list, gate_list, flip_list, wire_list
 
     def _process_lists(self, list_type, lists):
-        replace_input_list = ['input ', 'CLK', 'NRST', ';']
+        replace_input_list  = ['input ', 'CLK', 'NRST', ';']
         replace_output_list = ['output ', ';']
-        replace_wire_list = ['wire ', ';']
+        replace_wire_list   = ['wire ', ';']
 
         replace_list = []
         if list_type == 'input':
@@ -81,8 +81,8 @@ class Reader:
         return lists
 
     def _process_logic_lists(self, list_type, lists):
-        replace_logic_gate = ['(', ')', ',','.A','.B','.C','.D','.Z',';']
-        replace_flip_flop_list = ['(', ')', ',','.D','.Q','.CP','.RN',';']
+        replace_logic_gate      = ['(', ')', ',','.A','.B','.C','.D','.Z',';']
+        replace_flip_flop_list  = ['(', ')', ',','.D','.Q','.CP','.RN',';']
 
         replace_list = []
         if list_type == 'logic_gate':
